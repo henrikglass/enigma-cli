@@ -38,24 +38,24 @@
  *     #define HGL_STRING_IMPLEMENTATION
  *     #include "hgl_memdbg.h"
  *
- * HGL_STRING_IMPLEMENTATION must only be defined once, in a single compilation unit. 
- * hgl_string allows the default allocator, reallocator and free function to be 
+ * HGL_STRING_IMPLEMENTATION must only be defined once, in a single compilation unit.
+ * hgl_string allows the default allocator, reallocator and free function to be
  * overridden by redefining the following defines before including hgl_string.h:
  *
  *     #define HGL_STRING_ALLOC    malloc
  *     #define HGL_STRING_REALLOC  realloc
  *     #define HGL_STRING_FREE     free
  *
- * hgl_string implements two types: HglStringBuilder and HglStringView. HglStringBuilder 
- * is a mutable null-terminated string type. HglStringView is an immutable optionally 
+ * hgl_string implements two types: HglStringBuilder and HglStringView. HglStringBuilder
+ * is a mutable null-terminated string type. HglStringView is an immutable optionally
  * null-terminated string type (although the "immutable" part should be taking with a
- * grain of salt - this is still C). 
+ * grain of salt - this is still C).
  *
  *
  * EXAMPLE:
  *
- * In this example, we create a string builder, append the contents of a file to the 
- * string builder, split the contents by line, and print out the number of occurances 
+ * In this example, we create a string builder, append the contents of a file to the
+ * string builder, split the contents by line, and print out the number of occurances
  * of the word "glass" on each line:
  *
  *     HglStringBuilder sb = hgl_sb_make("", 0);
@@ -108,10 +108,10 @@
 #define HGL_SV(literal) (hgl_sv_from(literal, sizeof(literal) - 1))
 
 #define HGL_SV_FMT "%.*s"
-#define HGL_SV_ARG(sv) (int) (sv).length, (sv).start 
+#define HGL_SV_ARG(sv) (int) (sv).length, (sv).start
 
 #define HGL_SB_FMT "%.*s"
-#define HGL_SB_ARG(sb) (int) (sb).length, (sb).cstr 
+#define HGL_SB_ARG(sb) (int) (sb).length, (sb).cstr
 
 /*--- Public type definitions -----------------------------------------------------------*/
 
@@ -154,7 +154,7 @@ HglStringView hgl_sv_from_sb(HglStringBuilder *sb);
 HglStringView hgl_sv_from_cstr(const char *cstr);
 
 /**
- * (Re-)Start a reentrant string view operation (I.e. functions that have "next" 
+ * (Re-)Start a reentrant string view operation (I.e. functions that have "next"
  * functionality, e.g. find, split, find_next_regex).
  */
 void hgl_sv_op_begin(HglStringView *sv);
@@ -188,22 +188,44 @@ HglStringView hgl_sv_lchop(HglStringView *sv, size_t n);
 HglStringView hgl_sv_rchop(HglStringView *sv, size_t n);
 
 /**
- * Find the next substring when splitting by `delim`. Similar to 
- * hgl_sv_split_next, but chops up the original string view. The part of the 
- * string to the left of `delim` is returned, and `sv` is modified to contain 
- * the part to the right of `delim`. If `sv` does not contain `delim`, the 
+ * Find the next substring when splitting by `delim`. Similar to
+ * hgl_sv_split_next, but chops up the original string view. The part of the
+ * string to the left of `delim` is returned, and `sv` is modified to contain
+ * the part to the right of `delim`. If `sv` does not contain `delim`, the
  * and identical string view to `sv` is returned.
  */
 HglStringView hgl_sv_lchop_until(HglStringView *sv, char delim);
 
 /**
  * Find the next substring when splitting by `delim`, from the right. Similar to
- * hgl_sv_split_next, but chops up the original string view. The part of the 
- * string to the right of `delim` is returned, and `sv` is modified to contain 
- * the part to the right of `delim`. If `sv` does not contain `delim`, the 
+ * hgl_sv_split_next, but chops up the original string view. The part of the
+ * string to the right of `delim` is returned, and `sv` is modified to contain
+ * the part to the right of `delim`. If `sv` does not contain `delim`, the
  * and identical string view to `sv` is returned.
  */
 HglStringView hgl_sv_rchop_until(HglStringView *sv, char delim);
+
+/**
+ * Chops `n` bytes from the beginning of `sv` where `n` is given by a user supplied
+ * function `f` when applied to `sv`. `f` should typcially define a lexer rule for some
+ * i user-defined token. If some prefix of `sv` with non-zero length satisfies the lexer
+ * rule, then `f` should return the length of that prefix. If no prefix of `sv` satisfies
+ * the lexer rule, then `f` should return 0. `f` must always return a number in the range
+ * [0, `sv->length`].
+ *
+ * Example:
+ *
+ *     size_t lexer_rule_greeting(HglStringView sv) {
+ *         if (hgl_sv_starts_with(&sv, "Hello")) return 5;
+ *         if (hgl_sv_starts_with(&sv, "Hi")) return 2;
+ *         return 0;
+ *     }
+ *
+ *           /.../
+ *
+ *     HglStringView greeting = hgl_sv_lchop_lexeme(&sv, lexer_rule_greeting);
+ */
+HglStringView hgl_sv_lchop_lexeme(HglStringView *sv, size_t (*f)(HglStringView));
 
 /**
  * Trims all whitespace from the left.
@@ -223,17 +245,17 @@ HglStringView hgl_sv_trim(HglStringView sv);
 /**
  * Parse the first part of `sv` as an unsigned 64 bit integer.
  */
-uint64_t hgl_sv_to_u64(HglStringView *sv);
+uint64_t hgl_sv_to_u64(HglStringView sv);
 
 /**
  * Parse the first part of `sv` as a signed 64 bit integer.
  */
-int64_t hgl_sv_to_i64(HglStringView *sv);
+int64_t hgl_sv_to_i64(HglStringView sv);
 
 /**
  * Parse the first part of `sv` as a 64 bit float.
  */
-double hgl_sv_to_f64(HglStringView *sv);
+double hgl_sv_to_f64(HglStringView sv);
 
 /**
  * Parse the first part of `sv` as an unsigned 64 bit integer, then
@@ -258,6 +280,12 @@ double hgl_sv_lchop_f64(HglStringView *sv);
  * with `substr`, false is returned and `sv` is left unmodifed.
  */
 bool hgl_sv_starts_with_lchop(HglStringView *sv, const char *substr);
+
+/**
+ * Returns true if `sv` starts with a prefix that satisfies a user-provided
+ * lexer rule function `f`. See `hgl_sv_lchop_lexeme` for more information.
+ */
+bool hgl_sv_starts_with_lexeme(HglStringView *sv, size_t (*f)(HglStringView));
 
 /**
  * Returns true if string view `sv` contains the substring `substr`.
@@ -291,14 +319,14 @@ bool hgl_sv_equals(HglStringView a, HglStringView b);
 /*=======================================================================================*/
 
 /**
- * Makes a new string builder from an initial (optional) c-string `cstr`, and a 
- * suggested initial capacity `initial_capacity`. The actual initial capacity 
+ * Makes a new string builder from an initial (optional) c-string `cstr`, and a
+ * suggested initial capacity `initial_capacity`. The actual initial capacity
  * is calculated as `max(strlen(cstr), initial_capacity)`.
  */
 HglStringBuilder hgl_sb_make(const char *cstr, size_t initial_capacity);
 
 /**
- * Makes a new copy of an existing string builder `sb`. 
+ * Makes a new copy of an existing string builder `sb`.
  */
 HglStringBuilder hgl_sb_make_copy(HglStringBuilder *sb);
 
@@ -313,7 +341,7 @@ void hgl_sb_destroy(HglStringBuilder *sb);
 void hgl_sb_clear(HglStringBuilder *sb);
 
 /**
- * Grows `sb` to `new_capacity`. If `new_capacity` is less than the current 
+ * Grows `sb` to `new_capacity`. If `new_capacity` is less than the current
  * capacity `sb` is left unchanged.
  */
 void hgl_sb_grow(HglStringBuilder *sb, size_t new_capacity);
@@ -321,12 +349,12 @@ void hgl_sb_grow(HglStringBuilder *sb, size_t new_capacity);
 /**
  * Grows `sb` to at least `needed_capacity`. New size depends on `policy`.
  */
-void hgl_sb_grow_by_policy(HglStringBuilder *sb, 
-                           size_t needed_capacity, 
+void hgl_sb_grow_by_policy(HglStringBuilder *sb,
+                           size_t needed_capacity,
                            HglStringGrowthPolicy policy);
 
 /**
- * Shrinks `sb` to fit, such that `sb->capacity` == `sb->length + 1` (to fit 
+ * Shrinks `sb` to fit, such that `sb->capacity` == `sb->length + 1` (to fit
  * the extra null terminator).
  */
 void hgl_sb_shrink_to_fit(HglStringBuilder *sb);
@@ -362,12 +390,12 @@ void hgl_sb_append_fmt(HglStringBuilder *sb, const char *fmt, ...);
 int hgl_sb_append_file(HglStringBuilder *sb, const char *path);
 
 /**
- * Replaces the section of text specified by `offset` and `length` with `replacement` 
+ * Replaces the section of text specified by `offset` and `length` with `replacement`
  * in string builder `sb`.
  */
-void hgl_sb_replace_section(HglStringBuilder *sb, 
-                            size_t offset, 
-                            size_t length, 
+void hgl_sb_replace_section(HglStringBuilder *sb,
+                            size_t offset,
+                            size_t length,
                             const char *replacement);
 
 /**
@@ -504,7 +532,7 @@ HglStringView hgl_sv_find_next(HglStringView *sv, const char *substr)
             if (sv->start[sv->it_ + i] != substr[i]) {
                 is_match = false;
                 break;
-            }  
+            }
         }
 
         sv->it_++;
@@ -515,7 +543,7 @@ HglStringView hgl_sv_find_next(HglStringView *sv, const char *substr)
             };
         }
     }
-   
+
     /* Walked past end */
     return (HglStringView) {
         .start  = NULL,
@@ -543,7 +571,7 @@ HglStringView hgl_sv_find_next_regex_match(HglStringView *sv, const char *regex)
         fprintf(stderr, "[hgl_string] ERROR: Could not compile regex \"%s\"\n", regex);
         return match;
     }
-    
+
     int ret = regexec(&re, sv->start + sv->it_, 1, &rmatch, 0);
     if (ret != 0) {
         if (ret != REG_NOMATCH) {
@@ -554,7 +582,7 @@ HglStringView hgl_sv_find_next_regex_match(HglStringView *sv, const char *regex)
     }
     match.start = sv->start + sv->it_ + rmatch.rm_so;
     match.length = rmatch.rm_eo - rmatch.rm_so;
-    
+
     regfree(&re);
     sv->it_ += rmatch.rm_so + match.length;
     return match;
@@ -567,7 +595,7 @@ HglStringView hgl_sv_lchop(HglStringView *sv, size_t n)
     }
 
     HglStringView left_part = (HglStringView) {
-        .start  = sv->start,  
+        .start  = sv->start,
         .length = n,
         .it_    = 0,
     };
@@ -586,7 +614,7 @@ HglStringView hgl_sv_rchop(HglStringView *sv, size_t n)
     }
 
     HglStringView right_part = (HglStringView) {
-        .start  = sv->start + sv->length - n,  
+        .start  = sv->start + sv->length - n,
         .length = n,
         .it_    = 0,
     };
@@ -607,7 +635,7 @@ HglStringView hgl_sv_lchop_until(HglStringView *sv, char delim)
     }
 
     HglStringView left_part = (HglStringView) {
-        .start  = sv->start,  
+        .start  = sv->start,
         .length = i,
         .it_    = 0,
     };
@@ -629,7 +657,7 @@ HglStringView hgl_sv_rchop_until(HglStringView *sv, char delim)
     }
 
     HglStringView right_part = (HglStringView) {
-        .start  = sv->start + i + 1, 
+        .start  = sv->start + i + 1,
         .length = sv->length - i - 1,
         .it_    = 0,
     };
@@ -638,6 +666,12 @@ HglStringView hgl_sv_rchop_until(HglStringView *sv, char delim)
     sv->it_    = 0;
 
     return right_part;
+}
+
+HglStringView hgl_sv_lchop_lexeme(HglStringView *sv, size_t (*f)(HglStringView))
+{
+    size_t n = f(*sv);
+    return hgl_sv_lchop(sv, n);
 }
 
 HglStringView hgl_sv_ltrim(HglStringView sv)
@@ -675,29 +709,29 @@ HglStringView hgl_sv_trim(HglStringView sv)
     return hgl_sv_rtrim(hgl_sv_ltrim(sv));
 }
 
-uint64_t hgl_sv_to_u64(HglStringView *sv)
+uint64_t hgl_sv_to_u64(HglStringView sv)
 {
     char temp[64];
-    size_t n = (sv->length < 63) ? sv->length : 63;
-    memcpy(temp, sv->start, n);
+    size_t n = (sv.length < 63) ? sv.length : 63;
+    memcpy(temp, sv.start, n);
     temp[n] = '\0';
     return strtoul(temp, NULL, 0);
 }
 
-int64_t hgl_sv_to_i64(HglStringView *sv)
+int64_t hgl_sv_to_i64(HglStringView sv)
 {
     char temp[64];
-    size_t n = (sv->length < 63) ? sv->length : 63;
-    memcpy(temp, sv->start, n);
+    size_t n = (sv.length < 63) ? sv.length : 63;
+    memcpy(temp, sv.start, n);
     temp[n] = '\0';
     return strtol(temp, NULL, 0);
 }
 
-double hgl_sv_to_f64(HglStringView *sv)
+double hgl_sv_to_f64(HglStringView sv)
 {
     char temp[64];
-    size_t n = (sv->length < 63) ? sv->length : 63;
-    memcpy(temp, sv->start, n);
+    size_t n = (sv.length < 63) ? sv.length : 63;
+    memcpy(temp, sv.start, n);
     temp[n] = '\0';
     return strtod(temp, NULL);
 }
@@ -713,7 +747,7 @@ uint64_t hgl_sv_lchop_u64(HglStringView *sv)
     hgl_sv_lchop(sv, end - temp);
     return value;
 }
-  
+
 int64_t hgl_sv_lchop_i64(HglStringView *sv)
 {
     char temp[64];
@@ -725,7 +759,7 @@ int64_t hgl_sv_lchop_i64(HglStringView *sv)
     hgl_sv_lchop(sv, end - temp);
     return value;
 }
-  
+
 double hgl_sv_lchop_f64(HglStringView *sv)
 {
     char temp[64];
@@ -746,6 +780,11 @@ bool hgl_sv_starts_with_lchop(HglStringView *sv, const char *substr)
     }
 
     return false;
+}
+
+bool hgl_sv_starts_with_lexeme(HglStringView *sv, size_t (*f)(HglStringView))
+{
+    return 0 != f(*sv);
 }
 
 bool hgl_sv_contains(HglStringView *sv, const char *substr)
@@ -787,7 +826,7 @@ HglStringBuilder hgl_sb_make(const char *cstr, size_t initial_capacity)
     if ((len + 1) > initial_capacity) {
         initial_capacity = len + 1;
     }
-   
+
     char *data = HGL_STRING_ALLOC(initial_capacity);
     memcpy(data, cstr, len);
     data[len] = '\0';
@@ -796,7 +835,7 @@ HglStringBuilder hgl_sb_make(const char *cstr, size_t initial_capacity)
         .cstr     = data,
         .length   = len,
         .capacity = initial_capacity,
-    }; 
+    };
 }
 
 HglStringBuilder hgl_sb_make_copy(HglStringBuilder *sb)
@@ -811,7 +850,7 @@ HglStringBuilder hgl_sb_make_copy(HglStringBuilder *sb)
 
 void hgl_sb_destroy(HglStringBuilder *sb)
 {
-    HGL_STRING_FREE(sb->cstr); 
+    HGL_STRING_FREE(sb->cstr);
     sb->cstr     = NULL;
     sb->length   = 0;
     sb->capacity = 0;
@@ -833,18 +872,18 @@ void hgl_sb_grow(HglStringBuilder *sb, size_t new_capacity)
     sb->capacity = new_capacity;
 }
 
-void hgl_sb_grow_by_policy(HglStringBuilder *sb, 
-                           size_t needed_capacity, 
+void hgl_sb_grow_by_policy(HglStringBuilder *sb,
+                           size_t needed_capacity,
                            HglStringGrowthPolicy policy)
 {
     if (needed_capacity < sb->capacity) {
         return;
     }
-    
+
     size_t new_capacity;
     switch (policy) {
         case HGL_SB_GROWTH_POLICY_TO_FIT: {
-            new_capacity = needed_capacity; 
+            new_capacity = needed_capacity;
         } break;
         case HGL_SB_GROWTH_POLICY_DOUBLE: {
             new_capacity = 2*sb->capacity;
@@ -874,10 +913,10 @@ void hgl_sb_append(HglStringBuilder *sb, const char *src, size_t length)
     if (length == 0) {
         return;
     }
-    
-    hgl_sb_grow_by_policy(sb, sb->length + length + 1, 
+
+    hgl_sb_grow_by_policy(sb, sb->length + length + 1,
                           HGL_SB_DEFAULT_GROWTH_POLICY);
-    
+
     if ((src > sb->cstr) && (src < sb->cstr + sb->length)) {
         memmove(sb->cstr + sb->length, src, length);
     } else {
@@ -889,9 +928,9 @@ void hgl_sb_append(HglStringBuilder *sb, const char *src, size_t length)
 
 void hgl_sb_append_char(HglStringBuilder *sb, char c)
 {
-    hgl_sb_grow_by_policy(sb, sb->length + 2, 
+    hgl_sb_grow_by_policy(sb, sb->length + 2,
                           HGL_SB_DEFAULT_GROWTH_POLICY);
-    
+
     sb->length++;
     sb->cstr[sb->length - 1] = c;
     sb->cstr[sb->length] = '\0';
@@ -911,16 +950,16 @@ void hgl_sb_append_fmt(HglStringBuilder *sb, const char *fmt, ...)
 {
     va_list args;
     va_start(args, fmt);
-    
+
     int length = vsnprintf(NULL, 0, fmt, args);
     if (length == 0) {
         va_end(args);
         return;
     }
 
-    hgl_sb_grow_by_policy(sb, sb->length + length + 1, 
+    hgl_sb_grow_by_policy(sb, sb->length + length + 1,
                           HGL_SB_DEFAULT_GROWTH_POLICY);
-    
+
     va_start(args, fmt);
     vsnprintf(&sb->cstr[sb->length], length + 1, fmt, args);
     sb->length = sb->length + length;
@@ -934,7 +973,7 @@ int hgl_sb_append_file(HglStringBuilder *sb, const char *path)
     /* open file */
     FILE *fp = fopen(path, "rb");
     if (fp == NULL) {
-        fprintf(stderr, "[hgl_string] ERROR: Could not open file %s. errno=%s\n", 
+        fprintf(stderr, "[hgl_string] ERROR: Could not open file %s. errno=%s\n",
                 path, strerror(errno));
         return -1;
     }
@@ -947,47 +986,47 @@ int hgl_sb_append_file(HglStringBuilder *sb, const char *path)
 
     /* grow sb if necessary */
     size_t needed_capacity = sb->length + fsize + 1;
-    hgl_sb_grow_by_policy(sb, needed_capacity, 
+    hgl_sb_grow_by_policy(sb, needed_capacity,
                           HGL_SB_DEFAULT_GROWTH_POLICY);
 
     /* read file into sb, update length, write null byte */
     assert(fread(sb->cstr + sb->length, fsize, 1, fp) == 1);
     sb->length += fsize;
     sb->cstr[sb->length] = '\0';
-    
+
     fclose(fp);
     return 0;
 }
 
-void hgl_sb_replace_section(HglStringBuilder *sb, 
-                            size_t offset, 
-                            size_t length, 
+void hgl_sb_replace_section(HglStringBuilder *sb,
+                            size_t offset,
+                            size_t length,
                             const char *replacement)
 {
     size_t repl_length = strlen(replacement);
     int len_diff = repl_length - length;
-        
+
     if (len_diff < 0 ) {
         /* replacement is smaller */
         /* copy replacement into substr */
         memcpy(sb->cstr + offset, replacement, repl_length);
 
         /* shift remaining string "left" */
-        memmove(sb->cstr + offset + repl_length, 
-                sb->cstr + offset + length, 
+        memmove(sb->cstr + offset + repl_length,
+                sb->cstr + offset + length,
                 sb->length - offset - length);
-    
+
     } else if (len_diff > 0) {
         /* replacement is bigger */
         /* grow if necessary */
-        hgl_sb_grow_by_policy(sb, sb->length + len_diff + 1, 
+        hgl_sb_grow_by_policy(sb, sb->length + len_diff + 1,
                               HGL_SB_DEFAULT_GROWTH_POLICY);
-            
+
         /* shift remaining string "right". */
-        memmove(sb->cstr + offset + repl_length, 
-                sb->cstr + offset + length, 
+        memmove(sb->cstr + offset + repl_length,
+                sb->cstr + offset + length,
                 sb->length - offset - length);
-        
+
         /* copy replacement into substr */
         memcpy(sb->cstr + offset, replacement, repl_length);
 
@@ -995,7 +1034,7 @@ void hgl_sb_replace_section(HglStringBuilder *sb,
         /* replacement is of same length, just overwrite */
         memcpy(sb->cstr + offset, replacement, repl_length);
     }
-        
+
     sb->length += len_diff;
     sb->cstr[sb->length] = '\0';
 }
@@ -1036,7 +1075,7 @@ void hgl_sb_replace_regex(HglStringBuilder *sb, const char *regex, const char *r
         sv.it_ += repl_len - match.length; // move iterator to after replament to avoid infinite
                                            // replacement loops whenever `replacement` itself is
                                            // a substring of `substr`.
-        
+
         /* find next match */
         match = hgl_sv_find_next_regex_match(&sv, regex);
     }
@@ -1067,10 +1106,10 @@ void hgl_sb_ltrim(HglStringBuilder *sb)
     }
 }
 
-void hgl_sb_trim(HglStringBuilder *sb) 
+void hgl_sb_trim(HglStringBuilder *sb)
 {
-    hgl_sb_rtrim(sb); 
-    hgl_sb_ltrim(sb); 
+    hgl_sb_rtrim(sb);
+    hgl_sb_ltrim(sb);
 }
 
 void hgl_sb_rchop(HglStringBuilder *sb, size_t n)
@@ -1082,6 +1121,4 @@ void hgl_sb_rchop(HglStringBuilder *sb, size_t n)
     sb->cstr[sb->length + 1] = '\0';
 }
 
-
 #endif
-

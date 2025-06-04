@@ -20,119 +20,173 @@ ANSI_RED	include/hgl_test.h	/^#define ANSI_RED /;"	macro	line:168
 ANSI_UNDERLINE	include/hgl_test.h	/^#define ANSI_UNDERLINE /;"	macro	line:174
 ASSERT	include/hgl_test.h	/^#define ASSERT(/;"	macro	line:251	signature:(cond_)
 ASSERT_CSTR_EQ	include/hgl_test.h	/^#define ASSERT_CSTR_EQ(/;"	macro	line:267	signature:(a_,b_)
-C2N	src/enigma_cli.c	/^#define C2N(/;"	macro	line:12	file:	signature:(c)
-C_FLAGS	makefile	/^C_FLAGS    := $(C_WARNINGS) $(C_INCLUDES) --std=c17 -O0 -ggdb3 $/;"	macro	line:13
-C_INCLUDES	makefile	/^C_INCLUDES := -I. -Iinclude$/;"	macro	line:12
-C_WARNINGS	makefile	/^C_WARNINGS := -Werror -Wall -Wlogical-op -Wextra -Wvla -Wnull-dereference \\$/;"	macro	line:4
-ENIGMA_ASSERT	src/enigma_cli.c	/^#define ENIGMA_ASSERT(/;"	macro	line:16	file:	signature:(cond,...)
-Enigma	src/enigma_cli.c	/^} Enigma;$/;"	typedef	line:46	typeref:struct:__anon37b356950408	file:
+BOLD	include/hgl_flags.h	/^#define BOLD /;"	macro	line:223
+C2N	src/enigma_cli.c	/^#define C2N(/;"	macro	line:22	file:	signature:(c)
+C_FLAGS	makefile	/^C_FLAGS    := $(C_WARNINGS) $(C_INCLUDES) --std=c17 -O0 -ggdb3 $/;"	macro	line:12
+C_INCLUDES	makefile	/^C_INCLUDES := -I. -Iinclude$/;"	macro	line:11
+C_WARNINGS	makefile	/^C_WARNINGS := -Werror -Wall -Wlogical-op -Wextra -Wvla -Wnull-dereference \\$/;"	macro	line:3
+Direction	src/enigma_cli.c	/^} Direction;$/;"	typedef	line:44	typeref:enum:__anon37b356950103	file:
+ENIGMA_ASSERT	src/enigma_cli.c	/^#define ENIGMA_ASSERT(/;"	macro	line:26	file:	signature:(cond,...)
+ENIGMA_ERROR	src/enigma_cli.c	/^#define ENIGMA_ERROR(/;"	macro	line:32	file:	signature:(...)
+Enigma	src/enigma_cli.c	/^} Enigma;$/;"	typedef	line:68	typeref:struct:__anon37b356950408	file:
 FILE_CONTENTS	include/hgl_test.h	/^#define FILE_CONTENTS(/;"	macro	line:297	signature:(filepath_)
+FORWARD	src/enigma_cli.c	/^    FORWARD,$/;"	enumerator	line:42	enum:__anon37b356950103	file:
 GLOBAL_SETUP	include/hgl_test.h	/^#define GLOBAL_SETUP /;"	macro	line:191
 GLOBAL_TEARDOWN	include/hgl_test.h	/^#define GLOBAL_TEARDOWN /;"	macro	line:204
+HGL_FLAGS_H	include/hgl_flags.h	/^#define HGL_FLAGS_H$/;"	macro	line:80
 HGL_FLAGS_IMPLEMENTATION	include/hgl_test.h	/^#define HGL_FLAGS_IMPLEMENTATION$/;"	macro	line:141
+HGL_FLAGS_IMPLEMENTATION	src/enigma_cli.c	/^#  define HGL_FLAGS_IMPLEMENTATION$/;"	macro	line:13	file:
+HGL_FLAGS_KIND_BOOL	include/hgl_flags.h	/^    HGL_FLAGS_KIND_BOOL,$/;"	enumerator	line:107	enum:__anon5ace28b50103
+HGL_FLAGS_KIND_F64	include/hgl_flags.h	/^    HGL_FLAGS_KIND_F64,$/;"	enumerator	line:110	enum:__anon5ace28b50103
+HGL_FLAGS_KIND_I64	include/hgl_flags.h	/^    HGL_FLAGS_KIND_I64,$/;"	enumerator	line:108	enum:__anon5ace28b50103
+HGL_FLAGS_KIND_STR	include/hgl_flags.h	/^    HGL_FLAGS_KIND_STR$/;"	enumerator	line:111	enum:__anon5ace28b50103
+HGL_FLAGS_KIND_U64	include/hgl_flags.h	/^    HGL_FLAGS_KIND_U64,$/;"	enumerator	line:109	enum:__anon5ace28b50103
+HGL_FLAGS_MAX_N_FLAGS	include/hgl_flags.h	/^#define HGL_FLAGS_MAX_N_FLAGS /;"	macro	line:88
+HGL_FLAGS_OPT_MANDATORY	include/hgl_flags.h	/^#define HGL_FLAGS_OPT_MANDATORY /;"	macro	line:93
+HGL_FLAGS_PRINT_MARGIN	include/hgl_flags.h	/^#define HGL_FLAGS_PRINT_MARGIN /;"	macro	line:91
+HGL_FLAGS_STATUS_DEFV_OUTSIDE_RANGE	include/hgl_flags.h	/^#define HGL_FLAGS_STATUS_DEFV_OUTSIDE_RANGE /;"	macro	line:98
+HGL_FLAGS_STATUS_INVALID_RANGE	include/hgl_flags.h	/^#define HGL_FLAGS_STATUS_INVALID_RANGE /;"	macro	line:99
+HGL_FLAGS_STATUS_PARSED	include/hgl_flags.h	/^#define HGL_FLAGS_STATUS_PARSED /;"	macro	line:95
+HGL_FLAGS_STATUS_RANGE_OVERFLOW	include/hgl_flags.h	/^#define HGL_FLAGS_STATUS_RANGE_OVERFLOW /;"	macro	line:96
+HGL_FLAGS_STATUS_RANGE_UNDERFLOW	include/hgl_flags.h	/^#define HGL_FLAGS_STATUS_RANGE_UNDERFLOW /;"	macro	line:97
 HGL_SB_ARG	include/hgl_string.h	/^#define HGL_SB_ARG(/;"	macro	line:114	signature:(sb)
-HGL_SB_DEFAULT_GROWTH_POLICY	include/hgl_string.h	/^#define HGL_SB_DEFAULT_GROWTH_POLICY /;"	macro	line:425
+HGL_SB_DEFAULT_GROWTH_POLICY	include/hgl_string.h	/^#define HGL_SB_DEFAULT_GROWTH_POLICY /;"	macro	line:453
 HGL_SB_FMT	include/hgl_string.h	/^#define HGL_SB_FMT /;"	macro	line:113
 HGL_SB_GROWTH_POLICY_DOUBLE	include/hgl_string.h	/^    HGL_SB_GROWTH_POLICY_DOUBLE,$/;"	enumerator	line:119	enum:__anon438705ff0103
 HGL_SB_GROWTH_POLICY_TO_FIT	include/hgl_string.h	/^    HGL_SB_GROWTH_POLICY_TO_FIT,$/;"	enumerator	line:120	enum:__anon438705ff0103
-HGL_STRING_ALLOC	include/hgl_string.h	/^#define HGL_STRING_ALLOC /;"	macro	line:418
-HGL_STRING_FREE	include/hgl_string.h	/^#define HGL_STRING_FREE /;"	macro	line:420
+HGL_STRING_ALLOC	include/hgl_string.h	/^#define HGL_STRING_ALLOC /;"	macro	line:446
+HGL_STRING_FREE	include/hgl_string.h	/^#define HGL_STRING_FREE /;"	macro	line:448
 HGL_STRING_H	include/hgl_string.h	/^#define HGL_STRING_H$/;"	macro	line:93
-HGL_STRING_IMPLEMENTATION	src/enigma_cli.c	/^#define HGL_STRING_IMPLEMENTATION$/;"	macro	line:4	file:
-HGL_STRING_REALLOC	include/hgl_string.h	/^#define HGL_STRING_REALLOC /;"	macro	line:419
+HGL_STRING_IMPLEMENTATION	src/enigma_cli.c	/^#define HGL_STRING_IMPLEMENTATION$/;"	macro	line:17	file:
+HGL_STRING_REALLOC	include/hgl_string.h	/^#define HGL_STRING_REALLOC /;"	macro	line:447
 HGL_SV	include/hgl_string.h	/^#define HGL_SV(/;"	macro	line:108	signature:(literal)
 HGL_SV_ARG	include/hgl_string.h	/^#define HGL_SV_ARG(/;"	macro	line:111	signature:(sv)
 HGL_SV_FMT	include/hgl_string.h	/^#define HGL_SV_FMT /;"	macro	line:110
 HGL_TEST_H	include/hgl_test.h	/^#define HGL_TEST_H$/;"	macro	line:135
+HglFlag	include/hgl_flags.h	/^} HglFlag;$/;"	typedef	line:135	typeref:struct:__anon5ace28b50308
+HglFlagKind	include/hgl_flags.h	/^} HglFlagKind;$/;"	typedef	line:112	typeref:enum:__anon5ace28b50103
+HglFlagValue	include/hgl_flags.h	/^} HglFlagValue;$/;"	typedef	line:121	typeref:union:__anon5ace28b5020a
 HglStringBuilder	include/hgl_string.h	/^} HglStringBuilder;$/;"	typedef	line:128	typeref:struct:__anon438705ff0208
 HglStringGrowthPolicy	include/hgl_string.h	/^} HglStringGrowthPolicy;$/;"	typedef	line:121	typeref:enum:__anon438705ff0103
 HglStringView	include/hgl_string.h	/^} HglStringView;$/;"	typedef	line:135	typeref:struct:__anon438705ff0308
 HglTest	include/hgl_test.h	/^} HglTest;$/;"	typedef	line:318	typeref:struct:__anon70876d680108
-IN_ALPHABET	src/enigma_cli.c	/^#define IN_ALPHABET(/;"	macro	line:15	file:	signature:(c)
+IN_ALPHABET	src/enigma_cli.c	/^#define IN_ALPHABET(/;"	macro	line:25	file:	signature:(c)
 LOG	include/hgl_test.h	/^#define LOG(/;"	macro	line:284	signature:(...)
-N2C	src/enigma_cli.c	/^#define N2C(/;"	macro	line:13	file:	signature:(n)
-Plugboard	src/enigma_cli.c	/^} Plugboard;$/;"	typedef	line:38	typeref:struct:__anon37b356950308	file:
-Reflector	src/enigma_cli.c	/^} Reflector;$/;"	typedef	line:34	typeref:struct:__anon37b356950208	file:
-Rotor	src/enigma_cli.c	/^} Rotor;$/;"	typedef	line:30	typeref:struct:__anon37b356950108	file:
-TARGET	makefile	/^TARGET := enigma-cli$/;"	macro	line:2
+N2C	src/enigma_cli.c	/^#define N2C(/;"	macro	line:23	file:	signature:(n)
+NC	include/hgl_flags.h	/^#define NC /;"	macro	line:226
+RED	include/hgl_flags.h	/^#define RED /;"	macro	line:224
+REVERSE	src/enigma_cli.c	/^    REVERSE,$/;"	enumerator	line:43	enum:__anon37b356950103	file:
+Rotor	src/enigma_cli.c	/^} Rotor;$/;"	typedef	line:57	typeref:struct:__anon37b356950308	file:
 TEST	include/hgl_test.h	/^#define TEST(/;"	macro	line:236	signature:(name_,...)
+TEST	test/test.c	/^TEST(test_default_configuration) {$/;"	function	line:6	signature:(test_default_configuration)
 TEST_EXIT_ASSERT_FAIL	include/hgl_test.h	/^#define TEST_EXIT_ASSERT_FAIL /;"	macro	line:159
 TEST_EXIT_CAUGHT_EXPECTED_SIGNAL	include/hgl_test.h	/^#define TEST_EXIT_CAUGHT_EXPECTED_SIGNAL /;"	macro	line:160
 TEST_EXIT_SUCCESS	include/hgl_test.h	/^#define TEST_EXIT_SUCCESS /;"	macro	line:158
 TEST_EXPECT_OUTPUT_FAIL	include/hgl_test.h	/^#define TEST_EXPECT_OUTPUT_FAIL /;"	macro	line:163
 TEST_EXPECT_SIGNAL_FAIL	include/hgl_test.h	/^#define TEST_EXPECT_SIGNAL_FAIL /;"	macro	line:164
 TEST_GOT_UNEXPECTED_SIGNAL_FAIL	include/hgl_test.h	/^#define TEST_GOT_UNEXPECTED_SIGNAL_FAIL /;"	macro	line:165
-TO_UPPER	src/enigma_cli.c	/^#define TO_UPPER(/;"	macro	line:14	file:	signature:(c)
+TO_UPPER	src/enigma_cli.c	/^#define TO_UPPER(/;"	macro	line:24	file:	signature:(c)
+Wiring	src/enigma_cli.c	/^} Wiring;$/;"	typedef	line:48	typeref:struct:__anon37b356950208	file:
+YELLOW	include/hgl_flags.h	/^#define YELLOW /;"	macro	line:225
 _POSIX_C_SOURCE	include/hgl_test.h	/^#define _POSIX_C_SOURCE /;"	macro	line:137
-__anon37b356950108	src/enigma_cli.c	/^typedef struct {$/;"	struct	line:25	file:
-__anon37b356950208	src/enigma_cli.c	/^typedef struct {$/;"	struct	line:32	file:
-__anon37b356950308	src/enigma_cli.c	/^typedef struct {$/;"	struct	line:36	file:
-__anon37b356950408	src/enigma_cli.c	/^typedef struct {$/;"	struct	line:40	file:
+__anon37b356950103	src/enigma_cli.c	/^typedef enum {$/;"	enum	line:41	file:
+__anon37b356950208	src/enigma_cli.c	/^typedef struct {$/;"	struct	line:46	file:
+__anon37b356950308	src/enigma_cli.c	/^typedef struct {$/;"	struct	line:50	file:
+__anon37b356950408	src/enigma_cli.c	/^typedef struct {$/;"	struct	line:64	file:
 __anon438705ff0103	include/hgl_string.h	/^typedef enum {$/;"	enum	line:118
 __anon438705ff0208	include/hgl_string.h	/^typedef struct {$/;"	struct	line:124
 __anon438705ff0308	include/hgl_string.h	/^typedef struct {$/;"	struct	line:131
+__anon5ace28b50103	include/hgl_flags.h	/^{$/;"	enum	line:106
+__anon5ace28b5020a	include/hgl_flags.h	/^{$/;"	union	line:115
+__anon5ace28b50308	include/hgl_flags.h	/^{$/;"	struct	line:124
 __anon70876d680108	include/hgl_test.h	/^{$/;"	struct	line:302
 __anon70876d680208	include/hgl_test.h	/^    struct {$/;"	struct	line:303	struct:__anon70876d680108
-all	makefile	/^all:$/;"	target	line:15
+all	makefile	/^all: enigma-cli enigma-test$/;"	target	line:14
+apply_indicator_setting	src/enigma_cli.c	/^static void apply_indicator_setting(Enigma *enigma, const char *str)$/;"	function	line:270	typeref:typename:void	file:	signature:(Enigma * enigma,const char * str)
+apply_plugboard_setting	src/enigma_cli.c	/^static void apply_plugboard_setting(Enigma *enigma, const char *str)$/;"	function	line:237	typeref:typename:void	file:	signature:(Enigma * enigma,const char * str)
+apply_reflector_setting	src/enigma_cli.c	/^static void apply_reflector_setting(Enigma *enigma, const char *str)$/;"	function	line:162	typeref:typename:void	file:	signature:(Enigma * enigma,const char * str)
+apply_ring_setting	src/enigma_cli.c	/^static void apply_ring_setting(Enigma *enigma, const char *str)$/;"	function	line:216	typeref:typename:void	file:	signature:(Enigma * enigma,const char * str)
+apply_rotor_setting	src/enigma_cli.c	/^static void apply_rotor_setting(Enigma *enigma, const char *str)$/;"	function	line:180	typeref:typename:void	file:	signature:(Enigma * enigma,const char * str)
+b	include/hgl_flags.h	/^    bool b;$/;"	member	line:116	union:__anon5ace28b5020a	typeref:typename:bool
 capacity	include/hgl_string.h	/^    size_t capacity;     \/* total capacity, including null terminator *\/$/;"	member	line:127	struct:__anon438705ff0208	typeref:typename:size_t
-clean	makefile	/^clean:$/;"	target	line:18
+clean	makefile	/^clean:$/;"	target	line:22
 cstr	include/hgl_string.h	/^    char *cstr;          \/* null-terminated string *\/$/;"	member	line:125	struct:__anon438705ff0208	typeref:typename:char *
+default_value	include/hgl_flags.h	/^    HglFlagValue default_value; \/\/ can fit any flag value type$/;"	member	line:128	struct:__anon5ace28b50308	typeref:typename:HglFlagValue
+desc	include/hgl_flags.h	/^    const char *desc;$/;"	member	line:127	struct:__anon5ace28b50308	typeref:typename:const char *
+encrypt_char	src/enigma_cli.c	/^uint8_t encrypt_char(Enigma *enigma, char c)$/;"	function	line:135	typeref:typename:uint8_t	signature:(Enigma * enigma,char c)
 enigma-cli	README.md	/^# enigma-cli/;"	chapter	line:1
-enigma_configure	src/enigma_cli.c	/^Enigma enigma_configure(const char *reflector_str,$/;"	function	line:86	typeref:typename:Enigma	signature:(const char * reflector_str,const char * rotor_order_str,const char * ring_setting_str,const char * plugboard_setting_str,const char * indicator_setting_str)
-enigma_encrypt_character	src/enigma_cli.c	/^uint8_t enigma_encrypt_character(Enigma *enigma, char c)$/;"	function	line:216	typeref:typename:uint8_t	signature:(Enigma * enigma,char c)
-enigma_plugboard_pass	src/enigma_cli.c	/^static uint8_t enigma_plugboard_pass(Plugboard *plugboard, uint8_t n)$/;"	function	line:243	typeref:typename:uint8_t	file:	signature:(Plugboard * plugboard,uint8_t n)
-enigma_reflector_pass	src/enigma_cli.c	/^static uint8_t enigma_reflector_pass(const Reflector *r, uint8_t n)$/;"	function	line:264	typeref:typename:uint8_t	file:	signature:(const Reflector * r,uint8_t n)
-enigma_rotor_fwd_pass	src/enigma_cli.c	/^static uint8_t enigma_rotor_fwd_pass(const Rotor *r, uint8_t ring_setting, uint8_t rotor_positio/;"	function	line:248	typeref:typename:uint8_t	file:	signature:(const Rotor * r,uint8_t ring_setting,uint8_t rotor_position,uint8_t n)
-enigma_rotor_rev_pass	src/enigma_cli.c	/^static uint8_t enigma_rotor_rev_pass(const Rotor *r, uint8_t ring_setting, uint8_t rotor_positio/;"	function	line:256	typeref:typename:uint8_t	file:	signature:(const Rotor * r,uint8_t ring_setting,uint8_t rotor_position,uint8_t n)
+enigma-cli	makefile	/^enigma-cli:$/;"	target	line:16
+enigma-test	makefile	/^enigma-test:$/;"	target	line:19
+enigma_cli_main	src/enigma_cli.c	/^int enigma_cli_main(int argc, char *argv[])$/;"	function	line:88	typeref:typename:int	signature:(int argc,char * argv[])
 expect_fail	include/hgl_test.h	/^    bool        expect_fail;   \/\/ Expect test to fail. Reports failure as success and vice ver/;"	member	line:315	struct:__anon70876d680108	typeref:typename:bool
 expect_output	include/hgl_test.h	/^    const char *expect_output; \/\/ Expect test to terminate with `expect_output` on "stdout".$/;"	member	line:313	struct:__anon70876d680108	typeref:typename:const char *
 expect_signal	include/hgl_test.h	/^    int         expect_signal; \/\/ Expect test to exit with signal, otherwise fail test. E.g. `/;"	member	line:314	struct:__anon70876d680108	typeref:typename:int
-hgl_sb_append	include/hgl_string.h	/^void hgl_sb_append(HglStringBuilder *sb, const char *src, size_t length)$/;"	function	line:872	typeref:typename:void	signature:(HglStringBuilder * sb,const char * src,size_t length)
-hgl_sb_append_char	include/hgl_string.h	/^void hgl_sb_append_char(HglStringBuilder *sb, char c)$/;"	function	line:890	typeref:typename:void	signature:(HglStringBuilder * sb,char c)
-hgl_sb_append_cstr	include/hgl_string.h	/^void hgl_sb_append_cstr(HglStringBuilder *sb, const char *cstr)$/;"	function	line:905	typeref:typename:void	signature:(HglStringBuilder * sb,const char * cstr)
-hgl_sb_append_file	include/hgl_string.h	/^int hgl_sb_append_file(HglStringBuilder *sb, const char *path)$/;"	function	line:932	typeref:typename:int	signature:(HglStringBuilder * sb,const char * path)
-hgl_sb_append_fmt	include/hgl_string.h	/^void hgl_sb_append_fmt(HglStringBuilder *sb, const char *fmt, ...)$/;"	function	line:910	typeref:typename:void	signature:(HglStringBuilder * sb,const char * fmt,...)
-hgl_sb_append_sv	include/hgl_string.h	/^void hgl_sb_append_sv(HglStringBuilder *sb, HglStringView *sv)$/;"	function	line:900	typeref:typename:void	signature:(HglStringBuilder * sb,HglStringView * sv)
-hgl_sb_clear	include/hgl_string.h	/^void hgl_sb_clear(HglStringBuilder *sb)$/;"	function	line:820	typeref:typename:void	signature:(HglStringBuilder * sb)
-hgl_sb_destroy	include/hgl_string.h	/^void hgl_sb_destroy(HglStringBuilder *sb)$/;"	function	line:812	typeref:typename:void	signature:(HglStringBuilder * sb)
-hgl_sb_grow	include/hgl_string.h	/^void hgl_sb_grow(HglStringBuilder *sb, size_t new_capacity)$/;"	function	line:826	typeref:typename:void	signature:(HglStringBuilder * sb,size_t new_capacity)
-hgl_sb_grow_by_policy	include/hgl_string.h	/^void hgl_sb_grow_by_policy(HglStringBuilder *sb, $/;"	function	line:836	typeref:typename:void	signature:(HglStringBuilder * sb,size_t needed_capacity,HglStringGrowthPolicy policy)
-hgl_sb_ltrim	include/hgl_string.h	/^void hgl_sb_ltrim(HglStringBuilder *sb)$/;"	function	line:1056	typeref:typename:void	signature:(HglStringBuilder * sb)
-hgl_sb_make	include/hgl_string.h	/^HglStringBuilder hgl_sb_make(const char *cstr, size_t initial_capacity)$/;"	function	line:784	typeref:typename:HglStringBuilder	signature:(const char * cstr,size_t initial_capacity)
-hgl_sb_make_copy	include/hgl_string.h	/^HglStringBuilder hgl_sb_make_copy(HglStringBuilder *sb)$/;"	function	line:802	typeref:typename:HglStringBuilder	signature:(HglStringBuilder * sb)
-hgl_sb_rchop	include/hgl_string.h	/^void hgl_sb_rchop(HglStringBuilder *sb, size_t n)$/;"	function	line:1076	typeref:typename:void	signature:(HglStringBuilder * sb,size_t n)
-hgl_sb_replace	include/hgl_string.h	/^void hgl_sb_replace(HglStringBuilder *sb, const char *substr, const char *replacement)$/;"	function	line:1003	typeref:typename:void	signature:(HglStringBuilder * sb,const char * substr,const char * replacement)
-hgl_sb_replace_regex	include/hgl_string.h	/^void hgl_sb_replace_regex(HglStringBuilder *sb, const char *regex, const char *replacement)$/;"	function	line:1024	typeref:typename:void	signature:(HglStringBuilder * sb,const char * regex,const char * replacement)
-hgl_sb_replace_section	include/hgl_string.h	/^void hgl_sb_replace_section(HglStringBuilder *sb, $/;"	function	line:962	typeref:typename:void	signature:(HglStringBuilder * sb,size_t offset,size_t length,const char * replacement)
-hgl_sb_rtrim	include/hgl_string.h	/^void hgl_sb_rtrim(HglStringBuilder *sb)$/;"	function	line:1045	typeref:typename:void	signature:(HglStringBuilder * sb)
-hgl_sb_shrink_to_fit	include/hgl_string.h	/^void hgl_sb_shrink_to_fit(HglStringBuilder *sb)$/;"	function	line:862	typeref:typename:void	signature:(HglStringBuilder * sb)
-hgl_sb_trim	include/hgl_string.h	/^void hgl_sb_trim(HglStringBuilder *sb) $/;"	function	line:1070	typeref:typename:void	signature:(HglStringBuilder * sb)
-hgl_sv_compare	include/hgl_string.h	/^int hgl_sv_compare(HglStringView a, HglStringView b)$/;"	function	line:772	typeref:typename:int	signature:(HglStringView a,HglStringView b)
-hgl_sv_contains	include/hgl_string.h	/^bool hgl_sv_contains(HglStringView *sv, const char *substr)$/;"	function	line:751	typeref:typename:bool	signature:(HglStringView * sv,const char * substr)
-hgl_sv_ends_with	include/hgl_string.h	/^bool hgl_sv_ends_with(HglStringView *sv, const char *substr)$/;"	function	line:765	typeref:typename:bool	signature:(HglStringView * sv,const char * substr)
-hgl_sv_equals	include/hgl_string.h	/^bool hgl_sv_equals(HglStringView a, HglStringView b)$/;"	function	line:779	typeref:typename:bool	signature:(HglStringView a,HglStringView b)
-hgl_sv_find_next	include/hgl_string.h	/^HglStringView hgl_sv_find_next(HglStringView *sv, const char *substr)$/;"	function	line:483	typeref:typename:HglStringView	signature:(HglStringView * sv,const char * substr)
-hgl_sv_find_next_regex_match	include/hgl_string.h	/^HglStringView hgl_sv_find_next_regex_match(HglStringView *sv, const char *regex)$/;"	function	line:526	typeref:typename:HglStringView	signature:(HglStringView * sv,const char * regex)
-hgl_sv_from	include/hgl_string.h	/^HglStringView hgl_sv_from(const char *cstr, size_t length)$/;"	function	line:428	typeref:typename:HglStringView	signature:(const char * cstr,size_t length)
-hgl_sv_from_cstr	include/hgl_string.h	/^HglStringView hgl_sv_from_cstr(const char *cstr)$/;"	function	line:444	typeref:typename:HglStringView	signature:(const char * cstr)
-hgl_sv_from_sb	include/hgl_string.h	/^HglStringView hgl_sv_from_sb(HglStringBuilder *sb)$/;"	function	line:436	typeref:typename:HglStringView	signature:(HglStringBuilder * sb)
-hgl_sv_lchop	include/hgl_string.h	/^HglStringView hgl_sv_lchop(HglStringView *sv, size_t n)$/;"	function	line:563	typeref:typename:HglStringView	signature:(HglStringView * sv,size_t n)
-hgl_sv_lchop_f64	include/hgl_string.h	/^double hgl_sv_lchop_f64(HglStringView *sv)$/;"	function	line:729	typeref:typename:double	signature:(HglStringView * sv)
-hgl_sv_lchop_i64	include/hgl_string.h	/^int64_t hgl_sv_lchop_i64(HglStringView *sv)$/;"	function	line:717	typeref:typename:int64_t	signature:(HglStringView * sv)
-hgl_sv_lchop_u64	include/hgl_string.h	/^uint64_t hgl_sv_lchop_u64(HglStringView *sv)$/;"	function	line:705	typeref:typename:uint64_t	signature:(HglStringView * sv)
-hgl_sv_lchop_until	include/hgl_string.h	/^HglStringView hgl_sv_lchop_until(HglStringView *sv, char delim)$/;"	function	line:600	typeref:typename:HglStringView	signature:(HglStringView * sv,char delim)
-hgl_sv_ltrim	include/hgl_string.h	/^HglStringView hgl_sv_ltrim(HglStringView sv)$/;"	function	line:643	typeref:typename:HglStringView	signature:(HglStringView sv)
-hgl_sv_op_begin	include/hgl_string.h	/^void hgl_sv_op_begin(HglStringView *sv)$/;"	function	line:452	typeref:typename:void	signature:(HglStringView * sv)
-hgl_sv_rchop	include/hgl_string.h	/^HglStringView hgl_sv_rchop(HglStringView *sv, size_t n)$/;"	function	line:582	typeref:typename:HglStringView	signature:(HglStringView * sv,size_t n)
-hgl_sv_rchop_until	include/hgl_string.h	/^HglStringView hgl_sv_rchop_until(HglStringView *sv, char delim)$/;"	function	line:622	typeref:typename:HglStringView	signature:(HglStringView * sv,char delim)
-hgl_sv_rtrim	include/hgl_string.h	/^HglStringView hgl_sv_rtrim(HglStringView sv)$/;"	function	line:658	typeref:typename:HglStringView	signature:(HglStringView sv)
-hgl_sv_split_next	include/hgl_string.h	/^HglStringView hgl_sv_split_next(HglStringView *sv, char delim)$/;"	function	line:457	typeref:typename:HglStringView	signature:(HglStringView * sv,char delim)
-hgl_sv_starts_with	include/hgl_string.h	/^bool hgl_sv_starts_with(HglStringView *sv, const char *substr)$/;"	function	line:758	typeref:typename:bool	signature:(HglStringView * sv,const char * substr)
-hgl_sv_starts_with_lchop	include/hgl_string.h	/^bool hgl_sv_starts_with_lchop(HglStringView *sv, const char *substr)$/;"	function	line:741	typeref:typename:bool	signature:(HglStringView * sv,const char * substr)
-hgl_sv_to_f64	include/hgl_string.h	/^double hgl_sv_to_f64(HglStringView *sv)$/;"	function	line:696	typeref:typename:double	signature:(HglStringView * sv)
-hgl_sv_to_i64	include/hgl_string.h	/^int64_t hgl_sv_to_i64(HglStringView *sv)$/;"	function	line:687	typeref:typename:int64_t	signature:(HglStringView * sv)
-hgl_sv_to_u64	include/hgl_string.h	/^uint64_t hgl_sv_to_u64(HglStringView *sv)$/;"	function	line:678	typeref:typename:uint64_t	signature:(HglStringView * sv)
-hgl_sv_trim	include/hgl_string.h	/^HglStringView hgl_sv_trim(HglStringView sv)$/;"	function	line:673	typeref:typename:HglStringView	signature:(HglStringView sv)
+f64	include/hgl_flags.h	/^    double f64;$/;"	member	line:119	union:__anon5ace28b5020a	typeref:typename:double
+forward	src/enigma_cli.c	/^    Wiring forward;$/;"	member	line:51	struct:__anon37b356950308	typeref:typename:Wiring	file:
+hgl_flag_create_	include/hgl_flags.h	/^HglFlag *hgl_flag_create_(HglFlagKind kind, const char *names, const char *desc,$/;"	function	line:235	typeref:typename:HglFlag *	signature:(HglFlagKind kind,const char * names,const char * desc,HglFlagValue default_value,uint32_t opts,HglFlagValue range_min,HglFlagValue range_max)
+hgl_flags_	include/hgl_flags.h	/^static HglFlag hgl_flags_[HGL_FLAGS_MAX_N_FLAGS] = {0};$/;"	variable	line:228	typeref:typename:HglFlag[]
+hgl_flags_add_bool	include/hgl_flags.h	/^bool *hgl_flags_add_bool(const char *names, const char *desc, bool default_value, uint32_t opts)$/;"	function	line:254	typeref:typename:bool *	signature:(const char * names,const char * desc,bool default_value,uint32_t opts)
+hgl_flags_add_f64	include/hgl_flags.h	/^double *hgl_flags_add_f64(const char *names, const char *desc, double default_value, uint32_t op/;"	function	line:296	typeref:typename:double *	signature:(const char * names,const char * desc,double default_value,uint32_t opts)
+hgl_flags_add_f64_range	include/hgl_flags.h	/^double *hgl_flags_add_f64_range(const char *names, const char *desc, double default_value,$/;"	function	line:302	typeref:typename:double *	signature:(const char * names,const char * desc,double default_value,uint32_t opts,double range_min,double range_max)
+hgl_flags_add_i64	include/hgl_flags.h	/^int64_t *hgl_flags_add_i64(const char *names, const char *desc, int64_t default_value, uint32_t /;"	function	line:260	typeref:typename:int64_t *	signature:(const char * names,const char * desc,int64_t default_value,uint32_t opts)
+hgl_flags_add_i64_range	include/hgl_flags.h	/^int64_t *hgl_flags_add_i64_range(const char *names, const char *desc, int64_t default_value,$/;"	function	line:266	typeref:typename:int64_t *	signature:(const char * names,const char * desc,int64_t default_value,uint32_t opts,int64_t range_min,int64_t range_max)
+hgl_flags_add_str	include/hgl_flags.h	/^const char **hgl_flags_add_str(const char *names, const char *desc, const char *default_value, u/;"	function	line:314	typeref:typename:const char **	signature:(const char * names,const char * desc,const char * default_value,uint32_t opts)
+hgl_flags_add_u64	include/hgl_flags.h	/^uint64_t *hgl_flags_add_u64(const char *names, const char *desc, uint64_t default_value, uint32_/;"	function	line:278	typeref:typename:uint64_t *	signature:(const char * names,const char * desc,uint64_t default_value,uint32_t opts)
+hgl_flags_add_u64_range	include/hgl_flags.h	/^uint64_t *hgl_flags_add_u64_range(const char *names, const char *desc, uint64_t default_value,$/;"	function	line:284	typeref:typename:uint64_t *	signature:(const char * names,const char * desc,uint64_t default_value,uint32_t opts,uint64_t range_min,uint64_t range_max)
+hgl_flags_generate_completion_cmd	include/hgl_flags.h	/^void hgl_flags_generate_completion_cmd(FILE *stream, const char *program_name)$/;"	function	line:586	typeref:typename:void	signature:(FILE * stream,const char * program_name)
+hgl_flags_occured_before	include/hgl_flags.h	/^bool hgl_flags_occured_before(void *opt_a, void *opt_b)$/;"	function	line:575	typeref:typename:bool	signature:(void * opt_a,void * opt_b)
+hgl_flags_occured_in_args	include/hgl_flags.h	/^bool hgl_flags_occured_in_args(void *opt)$/;"	function	line:566	typeref:typename:bool	signature:(void * opt)
+hgl_flags_parse	include/hgl_flags.h	/^int hgl_flags_parse(int argc, char *argv[])$/;"	function	line:330	typeref:typename:int	signature:(int argc,char * argv[])
+hgl_flags_print	include/hgl_flags.h	/^void hgl_flags_print()$/;"	function	line:526	typeref:typename:void	signature:()
+hgl_n_flags_	include/hgl_flags.h	/^static size_t hgl_n_flags_ = 0;$/;"	variable	line:229	typeref:typename:size_t
+hgl_sb_append	include/hgl_string.h	/^void hgl_sb_append(HglStringBuilder *sb, const char *src, size_t length)$/;"	function	line:911	typeref:typename:void	signature:(HglStringBuilder * sb,const char * src,size_t length)
+hgl_sb_append_char	include/hgl_string.h	/^void hgl_sb_append_char(HglStringBuilder *sb, char c)$/;"	function	line:929	typeref:typename:void	signature:(HglStringBuilder * sb,char c)
+hgl_sb_append_cstr	include/hgl_string.h	/^void hgl_sb_append_cstr(HglStringBuilder *sb, const char *cstr)$/;"	function	line:944	typeref:typename:void	signature:(HglStringBuilder * sb,const char * cstr)
+hgl_sb_append_file	include/hgl_string.h	/^int hgl_sb_append_file(HglStringBuilder *sb, const char *path)$/;"	function	line:971	typeref:typename:int	signature:(HglStringBuilder * sb,const char * path)
+hgl_sb_append_fmt	include/hgl_string.h	/^void hgl_sb_append_fmt(HglStringBuilder *sb, const char *fmt, ...)$/;"	function	line:949	typeref:typename:void	signature:(HglStringBuilder * sb,const char * fmt,...)
+hgl_sb_append_sv	include/hgl_string.h	/^void hgl_sb_append_sv(HglStringBuilder *sb, HglStringView *sv)$/;"	function	line:939	typeref:typename:void	signature:(HglStringBuilder * sb,HglStringView * sv)
+hgl_sb_clear	include/hgl_string.h	/^void hgl_sb_clear(HglStringBuilder *sb)$/;"	function	line:859	typeref:typename:void	signature:(HglStringBuilder * sb)
+hgl_sb_destroy	include/hgl_string.h	/^void hgl_sb_destroy(HglStringBuilder *sb)$/;"	function	line:851	typeref:typename:void	signature:(HglStringBuilder * sb)
+hgl_sb_grow	include/hgl_string.h	/^void hgl_sb_grow(HglStringBuilder *sb, size_t new_capacity)$/;"	function	line:865	typeref:typename:void	signature:(HglStringBuilder * sb,size_t new_capacity)
+hgl_sb_grow_by_policy	include/hgl_string.h	/^void hgl_sb_grow_by_policy(HglStringBuilder *sb,$/;"	function	line:875	typeref:typename:void	signature:(HglStringBuilder * sb,size_t needed_capacity,HglStringGrowthPolicy policy)
+hgl_sb_ltrim	include/hgl_string.h	/^void hgl_sb_ltrim(HglStringBuilder *sb)$/;"	function	line:1095	typeref:typename:void	signature:(HglStringBuilder * sb)
+hgl_sb_make	include/hgl_string.h	/^HglStringBuilder hgl_sb_make(const char *cstr, size_t initial_capacity)$/;"	function	line:823	typeref:typename:HglStringBuilder	signature:(const char * cstr,size_t initial_capacity)
+hgl_sb_make_copy	include/hgl_string.h	/^HglStringBuilder hgl_sb_make_copy(HglStringBuilder *sb)$/;"	function	line:841	typeref:typename:HglStringBuilder	signature:(HglStringBuilder * sb)
+hgl_sb_rchop	include/hgl_string.h	/^void hgl_sb_rchop(HglStringBuilder *sb, size_t n)$/;"	function	line:1115	typeref:typename:void	signature:(HglStringBuilder * sb,size_t n)
+hgl_sb_replace	include/hgl_string.h	/^void hgl_sb_replace(HglStringBuilder *sb, const char *substr, const char *replacement)$/;"	function	line:1042	typeref:typename:void	signature:(HglStringBuilder * sb,const char * substr,const char * replacement)
+hgl_sb_replace_regex	include/hgl_string.h	/^void hgl_sb_replace_regex(HglStringBuilder *sb, const char *regex, const char *replacement)$/;"	function	line:1063	typeref:typename:void	signature:(HglStringBuilder * sb,const char * regex,const char * replacement)
+hgl_sb_replace_section	include/hgl_string.h	/^void hgl_sb_replace_section(HglStringBuilder *sb,$/;"	function	line:1001	typeref:typename:void	signature:(HglStringBuilder * sb,size_t offset,size_t length,const char * replacement)
+hgl_sb_rtrim	include/hgl_string.h	/^void hgl_sb_rtrim(HglStringBuilder *sb)$/;"	function	line:1084	typeref:typename:void	signature:(HglStringBuilder * sb)
+hgl_sb_shrink_to_fit	include/hgl_string.h	/^void hgl_sb_shrink_to_fit(HglStringBuilder *sb)$/;"	function	line:901	typeref:typename:void	signature:(HglStringBuilder * sb)
+hgl_sb_trim	include/hgl_string.h	/^void hgl_sb_trim(HglStringBuilder *sb)$/;"	function	line:1109	typeref:typename:void	signature:(HglStringBuilder * sb)
+hgl_sv_compare	include/hgl_string.h	/^int hgl_sv_compare(HglStringView a, HglStringView b)$/;"	function	line:811	typeref:typename:int	signature:(HglStringView a,HglStringView b)
+hgl_sv_contains	include/hgl_string.h	/^bool hgl_sv_contains(HglStringView *sv, const char *substr)$/;"	function	line:790	typeref:typename:bool	signature:(HglStringView * sv,const char * substr)
+hgl_sv_ends_with	include/hgl_string.h	/^bool hgl_sv_ends_with(HglStringView *sv, const char *substr)$/;"	function	line:804	typeref:typename:bool	signature:(HglStringView * sv,const char * substr)
+hgl_sv_equals	include/hgl_string.h	/^bool hgl_sv_equals(HglStringView a, HglStringView b)$/;"	function	line:818	typeref:typename:bool	signature:(HglStringView a,HglStringView b)
+hgl_sv_find_next	include/hgl_string.h	/^HglStringView hgl_sv_find_next(HglStringView *sv, const char *substr)$/;"	function	line:511	typeref:typename:HglStringView	signature:(HglStringView * sv,const char * substr)
+hgl_sv_find_next_regex_match	include/hgl_string.h	/^HglStringView hgl_sv_find_next_regex_match(HglStringView *sv, const char *regex)$/;"	function	line:554	typeref:typename:HglStringView	signature:(HglStringView * sv,const char * regex)
+hgl_sv_from	include/hgl_string.h	/^HglStringView hgl_sv_from(const char *cstr, size_t length)$/;"	function	line:456	typeref:typename:HglStringView	signature:(const char * cstr,size_t length)
+hgl_sv_from_cstr	include/hgl_string.h	/^HglStringView hgl_sv_from_cstr(const char *cstr)$/;"	function	line:472	typeref:typename:HglStringView	signature:(const char * cstr)
+hgl_sv_from_sb	include/hgl_string.h	/^HglStringView hgl_sv_from_sb(HglStringBuilder *sb)$/;"	function	line:464	typeref:typename:HglStringView	signature:(HglStringBuilder * sb)
+hgl_sv_lchop	include/hgl_string.h	/^HglStringView hgl_sv_lchop(HglStringView *sv, size_t n)$/;"	function	line:591	typeref:typename:HglStringView	signature:(HglStringView * sv,size_t n)
+hgl_sv_lchop_f64	include/hgl_string.h	/^double hgl_sv_lchop_f64(HglStringView *sv)$/;"	function	line:763	typeref:typename:double	signature:(HglStringView * sv)
+hgl_sv_lchop_i64	include/hgl_string.h	/^int64_t hgl_sv_lchop_i64(HglStringView *sv)$/;"	function	line:751	typeref:typename:int64_t	signature:(HglStringView * sv)
+hgl_sv_lchop_lexeme	include/hgl_string.h	/^HglStringView hgl_sv_lchop_lexeme(HglStringView *sv, size_t (*f)(HglStringView))$/;"	function	line:671	typeref:typename:HglStringView	signature:(HglStringView * sv,size_t (* f)(HglStringView))
+hgl_sv_lchop_u64	include/hgl_string.h	/^uint64_t hgl_sv_lchop_u64(HglStringView *sv)$/;"	function	line:739	typeref:typename:uint64_t	signature:(HglStringView * sv)
+hgl_sv_lchop_until	include/hgl_string.h	/^HglStringView hgl_sv_lchop_until(HglStringView *sv, char delim)$/;"	function	line:628	typeref:typename:HglStringView	signature:(HglStringView * sv,char delim)
+hgl_sv_ltrim	include/hgl_string.h	/^HglStringView hgl_sv_ltrim(HglStringView sv)$/;"	function	line:677	typeref:typename:HglStringView	signature:(HglStringView sv)
+hgl_sv_op_begin	include/hgl_string.h	/^void hgl_sv_op_begin(HglStringView *sv)$/;"	function	line:480	typeref:typename:void	signature:(HglStringView * sv)
+hgl_sv_rchop	include/hgl_string.h	/^HglStringView hgl_sv_rchop(HglStringView *sv, size_t n)$/;"	function	line:610	typeref:typename:HglStringView	signature:(HglStringView * sv,size_t n)
+hgl_sv_rchop_until	include/hgl_string.h	/^HglStringView hgl_sv_rchop_until(HglStringView *sv, char delim)$/;"	function	line:650	typeref:typename:HglStringView	signature:(HglStringView * sv,char delim)
+hgl_sv_rtrim	include/hgl_string.h	/^HglStringView hgl_sv_rtrim(HglStringView sv)$/;"	function	line:692	typeref:typename:HglStringView	signature:(HglStringView sv)
+hgl_sv_split_next	include/hgl_string.h	/^HglStringView hgl_sv_split_next(HglStringView *sv, char delim)$/;"	function	line:485	typeref:typename:HglStringView	signature:(HglStringView * sv,char delim)
+hgl_sv_starts_with	include/hgl_string.h	/^bool hgl_sv_starts_with(HglStringView *sv, const char *substr)$/;"	function	line:797	typeref:typename:bool	signature:(HglStringView * sv,const char * substr)
+hgl_sv_starts_with_lchop	include/hgl_string.h	/^bool hgl_sv_starts_with_lchop(HglStringView *sv, const char *substr)$/;"	function	line:775	typeref:typename:bool	signature:(HglStringView * sv,const char * substr)
+hgl_sv_starts_with_lexeme	include/hgl_string.h	/^bool hgl_sv_starts_with_lexeme(HglStringView *sv, size_t (*f)(HglStringView))$/;"	function	line:785	typeref:typename:bool	signature:(HglStringView * sv,size_t (* f)(HglStringView))
+hgl_sv_to_f64	include/hgl_string.h	/^double hgl_sv_to_f64(HglStringView sv)$/;"	function	line:730	typeref:typename:double	signature:(HglStringView sv)
+hgl_sv_to_i64	include/hgl_string.h	/^int64_t hgl_sv_to_i64(HglStringView sv)$/;"	function	line:721	typeref:typename:int64_t	signature:(HglStringView sv)
+hgl_sv_to_u64	include/hgl_string.h	/^uint64_t hgl_sv_to_u64(HglStringView sv)$/;"	function	line:712	typeref:typename:uint64_t	signature:(HglStringView sv)
+hgl_sv_trim	include/hgl_string.h	/^HglStringView hgl_sv_trim(HglStringView sv)$/;"	function	line:707	typeref:typename:HglStringView	signature:(HglStringView sv)
 hgl_test_opt_fail_fast	include/hgl_test.h	/^static bool *hgl_test_opt_fail_fast;$/;"	variable	line:335	typeref:typename:bool *
 hgl_test_opt_help	include/hgl_test.h	/^static bool *hgl_test_opt_help;$/;"	variable	line:337	typeref:typename:bool *
 hgl_test_opt_show_only_fails	include/hgl_test.h	/^static bool *hgl_test_opt_show_only_fails;$/;"	variable	line:336	typeref:typename:bool *
@@ -142,19 +196,33 @@ hgl_test_read_file	include/hgl_test.h	/^char *hgl_test_read_file(const char *fil
 hgl_test_run_test	include/hgl_test.h	/^void hgl_test_run_test(HglTest *test)$/;"	function	line:440	typeref:typename:void	signature:(HglTest * test)
 hgl_test_signal_handler	include/hgl_test.h	/^void hgl_test_signal_handler(int sig)$/;"	function	line:386	typeref:typename:void	signature:(int sig)
 hidden	include/hgl_test.h	/^    } hidden; \/* i.e. don't tuch this *\/$/;"	member	line:309	struct:__anon70876d680108	typeref:struct:__anon70876d680108::__anon70876d680208
+i64	include/hgl_flags.h	/^    int64_t i64;$/;"	member	line:118	union:__anon5ace28b5020a	typeref:typename:int64_t
 id	include/hgl_test.h	/^        uint32_t id;$/;"	member	line:307	struct:__anon70876d680108::__anon70876d680208	typeref:typename:uint32_t
 input	include/hgl_test.h	/^    const char *input;         \/\/ Start test with `input` on "stdin".$/;"	member	line:312	struct:__anon70876d680108	typeref:typename:const char *
+is_delimiting_char_	include/hgl_flags.h	/^static inline bool is_delimiting_char_(char c)$/;"	function	line:320	typeref:typename:bool	signature:(char c)
 it_	include/hgl_string.h	/^    size_t it_;          \/* gen. purpose iterator for reentrant string view ops. *\/$/;"	member	line:134	struct:__anon438705ff0308	typeref:typename:size_t
+kind	include/hgl_flags.h	/^    HglFlagKind kind;$/;"	member	line:125	struct:__anon5ace28b50308	typeref:typename:HglFlagKind
 length	include/hgl_string.h	/^    size_t length;       \/* length of `cstr` excluding null terminator *\/$/;"	member	line:126	struct:__anon438705ff0208	typeref:typename:size_t
 length	include/hgl_string.h	/^    size_t length;       \/* length of string view, excluding null terminator *\/$/;"	member	line:133	struct:__anon438705ff0308	typeref:typename:size_t
+lex_letter	src/enigma_cli.c	/^static size_t lex_letter(HglStringView sv)$/;"	function	line:324	typeref:typename:size_t	file:	signature:(HglStringView sv)
+lex_numeric	src/enigma_cli.c	/^static size_t lex_numeric(HglStringView sv)$/;"	function	line:310	typeref:typename:size_t	file:	signature:(HglStringView sv)
 main	include/hgl_test.h	/^int main(int argc, char *argv[])$/;"	function	line:582	typeref:typename:int	signature:(int argc,char * argv[])
-main	src/enigma_cli.c	/^int main(void)$/;"	function	line:68	typeref:typename:int	signature:(void)
+main	src/enigma_cli.c	/^int main(int argc, char *argv[])$/;"	function	line:339	typeref:typename:int	signature:(int argc,char * argv[])
+max	include/hgl_flags.h	/^#define max(/;"	macro	line:220	signature:(a,b)
+min	include/hgl_flags.h	/^#define min(/;"	macro	line:221	signature:(a,b)
 name	include/hgl_test.h	/^        const char *name;$/;"	member	line:304	struct:__anon70876d680108::__anon70876d680208	typeref:typename:const char *
+names	include/hgl_flags.h	/^    const char *names;$/;"	member	line:126	struct:__anon5ace28b50308	typeref:typename:const char *
+opts	include/hgl_flags.h	/^    uint32_t opts;$/;"	member	line:132	struct:__anon5ace28b50308	typeref:typename:uint32_t
+parse_order	include/hgl_flags.h	/^    int16_t parse_order;$/;"	member	line:134	struct:__anon5ace28b50308	typeref:typename:int16_t
 pass	include/hgl_test.h	/^        bool pass;$/;"	member	line:308	struct:__anon70876d680108::__anon70876d680208	typeref:typename:bool
-plugboard	src/enigma_cli.c	/^    Plugboard plugboard;$/;"	member	line:45	struct:__anon37b356950408	typeref:typename:Plugboard	file:
-reflector	src/enigma_cli.c	/^    Reflector reflector;$/;"	member	line:44	struct:__anon37b356950408	typeref:typename:Reflector	file:
+plugboard	src/enigma_cli.c	/^    Wiring plugboard;$/;"	member	line:67	struct:__anon37b356950408	typeref:typename:Wiring	file:
+position	src/enigma_cli.c	/^    uint8_t position;$/;"	member	line:56	struct:__anon37b356950308	typeref:typename:uint8_t	file:
+range_max	include/hgl_flags.h	/^    HglFlagValue range_max;$/;"	member	line:131	struct:__anon5ace28b50308	typeref:typename:HglFlagValue
+range_min	include/hgl_flags.h	/^    HglFlagValue range_min;$/;"	member	line:130	struct:__anon5ace28b50308	typeref:typename:HglFlagValue
+reflector	src/enigma_cli.c	/^    Wiring reflector;$/;"	member	line:66	struct:__anon37b356950408	typeref:typename:Wiring	file:
 result	include/hgl_test.h	/^        uint32_t result;$/;"	member	line:306	struct:__anon70876d680108::__anon70876d680208	typeref:typename:uint32_t
-ring_setting	src/enigma_cli.c	/^    uint8_t ring_setting[3];$/;"	member	line:42	struct:__anon37b356950408	typeref:typename:uint8_t[3]	file:
+reverse	src/enigma_cli.c	/^    Wiring reverse;$/;"	member	line:52	struct:__anon37b356950308	typeref:typename:Wiring	file:
+ring_setting	src/enigma_cli.c	/^    uint8_t ring_setting;$/;"	member	line:55	struct:__anon37b356950308	typeref:typename:uint8_t	file:
 rot1	tools/wiring.py	/^rot1 = "EKMFLGDQVZNTOWYHXUSPAIBRCJ"$/;"	variable	line:3
 rot2	tools/wiring.py	/^rot2 = "AJDKSIRUXBLHWTMCQGZNPYFVOE"$/;"	variable	line:4
 rot3	tools/wiring.py	/^rot3 = "BDFHJLCPRTXVZNYEIWGAKMUSQO"$/;"	variable	line:5
@@ -163,15 +231,16 @@ rot5	tools/wiring.py	/^rot5 = "VZBRGITYUPSDNHLXAWMJQOFECK"$/;"	variable	line:7
 rot6	tools/wiring.py	/^rot6 = "JPGVOUMFYQBENHZRDKASXLICTW"$/;"	variable	line:8
 rot7	tools/wiring.py	/^rot7 = "NZJHGRCXMYSWBOUFAIVLPEKQDT"$/;"	variable	line:9
 rot8	tools/wiring.py	/^rot8 = "FKQHTLXOCBJSPDZRAMEWNIUYGV"$/;"	variable	line:10
-rotor	src/enigma_cli.c	/^    Rotor rotor[3];$/;"	member	line:41	struct:__anon37b356950408	typeref:typename:Rotor[3]	file:
-rotor_position	src/enigma_cli.c	/^    uint8_t rotor_position[3];$/;"	member	line:43	struct:__anon37b356950408	typeref:typename:uint8_t[3]	file:
+rotor	src/enigma_cli.c	/^    Rotor rotor[3];$/;"	member	line:65	struct:__anon37b356950408	typeref:typename:Rotor[3]	file:
+rotor_pass	src/enigma_cli.c	/^static uint8_t rotor_pass(const Rotor *r, uint8_t n, Direction dir)$/;"	function	line:296	typeref:typename:uint8_t	file:	signature:(const Rotor * r,uint8_t n,Direction dir)
 setup	include/hgl_test.h	/^    void (*setup)(void);       \/\/ Specify a test-specific setup function to be run before the /;"	member	line:316	struct:__anon70876d680108	typeref:typename:void (*)(void)
 start	include/hgl_string.h	/^    const char *start;   \/* optionally null-terminated string *\/$/;"	member	line:132	struct:__anon438705ff0308	typeref:typename:const char *
+status	include/hgl_flags.h	/^    uint16_t status;$/;"	member	line:133	struct:__anon5ace28b50308	typeref:typename:uint16_t
+str	include/hgl_flags.h	/^    const char *str;$/;"	member	line:120	union:__anon5ace28b5020a	typeref:typename:const char *
 teardown	include/hgl_test.h	/^    void (*teardown)(void);    \/\/ Specify a test-specific teardown function to be run after th/;"	member	line:317	struct:__anon70876d680108	typeref:typename:void (*)(void)
 test_fn	include/hgl_test.h	/^        void (*test_fn)(void);$/;"	member	line:305	struct:__anon70876d680108::__anon70876d680208	typeref:typename:void (*)(void)
-turnover1	src/enigma_cli.c	/^    uint8_t turnover1;$/;"	member	line:28	struct:__anon37b356950108	typeref:typename:uint8_t	file:
-turnover2	src/enigma_cli.c	/^    uint8_t turnover2; \/* only valid for rotors VI, VII, and VIII *\/$/;"	member	line:29	struct:__anon37b356950108	typeref:typename:uint8_t	file:
-wiring	src/enigma_cli.c	/^    uint8_t wiring[26];$/;"	member	line:33	struct:__anon37b356950208	typeref:typename:uint8_t[26]	file:
-wiring	src/enigma_cli.c	/^    uint8_t wiring[26];$/;"	member	line:37	struct:__anon37b356950308	typeref:typename:uint8_t[26]	file:
-wiring_fwd	src/enigma_cli.c	/^    uint8_t wiring_fwd[26];$/;"	member	line:26	struct:__anon37b356950108	typeref:typename:uint8_t[26]	file:
-wiring_rev	src/enigma_cli.c	/^    uint8_t wiring_rev[26];$/;"	member	line:27	struct:__anon37b356950108	typeref:typename:uint8_t[26]	file:
+turnover1	src/enigma_cli.c	/^    uint8_t turnover1;$/;"	member	line:53	struct:__anon37b356950308	typeref:typename:uint8_t	file:
+turnover2	src/enigma_cli.c	/^    uint8_t turnover2; \/* only valid for rotors VI, VII, and VIII *\/$/;"	member	line:54	struct:__anon37b356950308	typeref:typename:uint8_t	file:
+u64	include/hgl_flags.h	/^    uint64_t u64;$/;"	member	line:117	union:__anon5ace28b5020a	typeref:typename:uint64_t
+value	include/hgl_flags.h	/^    HglFlagValue value;         \/\/ -- || --$/;"	member	line:129	struct:__anon5ace28b50308	typeref:typename:HglFlagValue
+wiring	src/enigma_cli.c	/^    uint8_t wiring[26];$/;"	member	line:47	struct:__anon37b356950208	typeref:typename:uint8_t[26]	file:

@@ -1,5 +1,4 @@
-
-TARGET := enigma-cli
+.PHONY: enigma-cli enigma-test clean
 
 C_WARNINGS := -Werror -Wall -Wlogical-op -Wextra -Wvla -Wnull-dereference \
 			  -Wswitch-enum -Wno-deprecated -Wduplicated-cond -Wduplicated-branches \
@@ -12,9 +11,15 @@ C_WARNINGS := -Werror -Wall -Wlogical-op -Wextra -Wvla -Wnull-dereference \
 C_INCLUDES := -I. -Iinclude
 C_FLAGS    := $(C_WARNINGS) $(C_INCLUDES) --std=c17 -O0 -ggdb3 
 
-all:
-	$(CC) $(C_FLAGS) src/enigma_cli.c -o $(TARGET)
+all: enigma-cli enigma-test
+
+enigma-cli:
+	gcc $(C_FLAGS) src/enigma_cli.c -o enigma-cli
+
+enigma-test:
+	gcc $(C_FLAGS) -Isrc test/test.c -o enigma-test && ./enigma-test
 
 clean:
-	-rm $(TARGET)
+	-rm enigma-cli
+	-rm enigma-test
 
