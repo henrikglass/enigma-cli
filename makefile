@@ -17,7 +17,7 @@ enigma-cli:
 	gcc $(C_FLAGS) src/enigma_cli.c -o enigma-cli
 
 enigma-test:
-	gcc $(C_FLAGS) -Isrc test/test.c -o enigma-test && ./enigma-test
+	gcc $(C_FLAGS) -Wno-discarded-qualifiers -Isrc test/test.c -o enigma-test && ./enigma-test
 
 clean:
 	-rm enigma-cli

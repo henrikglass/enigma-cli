@@ -20,22 +20,23 @@ ANSI_RED	include/hgl_test.h	/^#define ANSI_RED /;"	macro	line:168
 ANSI_UNDERLINE	include/hgl_test.h	/^#define ANSI_UNDERLINE /;"	macro	line:174
 ASSERT	include/hgl_test.h	/^#define ASSERT(/;"	macro	line:251	signature:(cond_)
 ASSERT_CSTR_EQ	include/hgl_test.h	/^#define ASSERT_CSTR_EQ(/;"	macro	line:267	signature:(a_,b_)
+BARE_PLUGBOARD	src/enigma_cli.c	/^static const Permutation BARE_PLUGBOARD = {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"};$/;"	variable	line:112	typeref:typename:const Permutation	file:
 BOLD	include/hgl_flags.h	/^#define BOLD /;"	macro	line:223
-C2N	src/enigma_cli.c	/^#define C2N(/;"	macro	line:22	file:	signature:(c)
+C2N	src/enigma_cli.c	/^#define C2N(/;"	macro	line:23	file:	signature:(c)
 C_FLAGS	makefile	/^C_FLAGS    := $(C_WARNINGS) $(C_INCLUDES) --std=c17 -O0 -ggdb3 $/;"	macro	line:12
 C_INCLUDES	makefile	/^C_INCLUDES := -I. -Iinclude$/;"	macro	line:11
 C_WARNINGS	makefile	/^C_WARNINGS := -Werror -Wall -Wlogical-op -Wextra -Wvla -Wnull-dereference \\$/;"	macro	line:3
-Direction	src/enigma_cli.c	/^} Direction;$/;"	typedef	line:44	typeref:enum:__anon37b356950103	file:
-ENIGMA_ASSERT	src/enigma_cli.c	/^#define ENIGMA_ASSERT(/;"	macro	line:26	file:	signature:(cond,...)
-ENIGMA_ERROR	src/enigma_cli.c	/^#define ENIGMA_ERROR(/;"	macro	line:32	file:	signature:(...)
-Enigma	src/enigma_cli.c	/^} Enigma;$/;"	typedef	line:68	typeref:struct:__anon37b356950408	file:
+Direction	src/enigma_cli.c	/^} Direction;$/;"	typedef	line:62	typeref:enum:__anon37b356950103	file:
+ENIGMA_ASSERT	src/enigma_cli.c	/^#define ENIGMA_ASSERT(/;"	macro	line:27	file:	signature:(cond,...)
+ENIGMA_ERROR	src/enigma_cli.c	/^#define ENIGMA_ERROR(/;"	macro	line:33	file:	signature:(...)
+Enigma	src/enigma_cli.c	/^} Enigma;$/;"	typedef	line:95	typeref:struct:__anon37b356950408	file:
 FILE_CONTENTS	include/hgl_test.h	/^#define FILE_CONTENTS(/;"	macro	line:297	signature:(filepath_)
-FORWARD	src/enigma_cli.c	/^    FORWARD,$/;"	enumerator	line:42	enum:__anon37b356950103	file:
+FORWARD	src/enigma_cli.c	/^    FORWARD,$/;"	enumerator	line:60	enum:__anon37b356950103	file:
 GLOBAL_SETUP	include/hgl_test.h	/^#define GLOBAL_SETUP /;"	macro	line:191
 GLOBAL_TEARDOWN	include/hgl_test.h	/^#define GLOBAL_TEARDOWN /;"	macro	line:204
 HGL_FLAGS_H	include/hgl_flags.h	/^#define HGL_FLAGS_H$/;"	macro	line:80
 HGL_FLAGS_IMPLEMENTATION	include/hgl_test.h	/^#define HGL_FLAGS_IMPLEMENTATION$/;"	macro	line:141
-HGL_FLAGS_IMPLEMENTATION	src/enigma_cli.c	/^#  define HGL_FLAGS_IMPLEMENTATION$/;"	macro	line:13	file:
+HGL_FLAGS_IMPLEMENTATION	src/enigma_cli.c	/^#  define HGL_FLAGS_IMPLEMENTATION$/;"	macro	line:14	file:
 HGL_FLAGS_KIND_BOOL	include/hgl_flags.h	/^    HGL_FLAGS_KIND_BOOL,$/;"	enumerator	line:107	enum:__anon5ace28b50103
 HGL_FLAGS_KIND_F64	include/hgl_flags.h	/^    HGL_FLAGS_KIND_F64,$/;"	enumerator	line:110	enum:__anon5ace28b50103
 HGL_FLAGS_KIND_I64	include/hgl_flags.h	/^    HGL_FLAGS_KIND_I64,$/;"	enumerator	line:108	enum:__anon5ace28b50103
@@ -57,7 +58,7 @@ HGL_SB_GROWTH_POLICY_TO_FIT	include/hgl_string.h	/^    HGL_SB_GROWTH_POLICY_TO_F
 HGL_STRING_ALLOC	include/hgl_string.h	/^#define HGL_STRING_ALLOC /;"	macro	line:446
 HGL_STRING_FREE	include/hgl_string.h	/^#define HGL_STRING_FREE /;"	macro	line:448
 HGL_STRING_H	include/hgl_string.h	/^#define HGL_STRING_H$/;"	macro	line:93
-HGL_STRING_IMPLEMENTATION	src/enigma_cli.c	/^#define HGL_STRING_IMPLEMENTATION$/;"	macro	line:17	file:
+HGL_STRING_IMPLEMENTATION	src/enigma_cli.c	/^#define HGL_STRING_IMPLEMENTATION$/;"	macro	line:18	file:
 HGL_STRING_REALLOC	include/hgl_string.h	/^#define HGL_STRING_REALLOC /;"	macro	line:447
 HGL_SV	include/hgl_string.h	/^#define HGL_SV(/;"	macro	line:108	signature:(literal)
 HGL_SV_ARG	include/hgl_string.h	/^#define HGL_SV_ARG(/;"	macro	line:111	signature:(sv)
@@ -70,29 +71,40 @@ HglStringBuilder	include/hgl_string.h	/^} HglStringBuilder;$/;"	typedef	line:128
 HglStringGrowthPolicy	include/hgl_string.h	/^} HglStringGrowthPolicy;$/;"	typedef	line:121	typeref:enum:__anon438705ff0103
 HglStringView	include/hgl_string.h	/^} HglStringView;$/;"	typedef	line:135	typeref:struct:__anon438705ff0308
 HglTest	include/hgl_test.h	/^} HglTest;$/;"	typedef	line:318	typeref:struct:__anon70876d680108
-IN_ALPHABET	src/enigma_cli.c	/^#define IN_ALPHABET(/;"	macro	line:25	file:	signature:(c)
+IN_ALPHABET	src/enigma_cli.c	/^#define IN_ALPHABET(/;"	macro	line:26	file:	signature:(c)
 LOG	include/hgl_test.h	/^#define LOG(/;"	macro	line:284	signature:(...)
-N2C	src/enigma_cli.c	/^#define N2C(/;"	macro	line:23	file:	signature:(n)
+N2C	src/enigma_cli.c	/^#define N2C(/;"	macro	line:24	file:	signature:(n)
 NC	include/hgl_flags.h	/^#define NC /;"	macro	line:226
+Permutation	src/enigma_cli.c	/^} Permutation;$/;"	typedef	line:75	typeref:struct:__anon37b356950208	file:
 RED	include/hgl_flags.h	/^#define RED /;"	macro	line:224
-REVERSE	src/enigma_cli.c	/^    REVERSE,$/;"	enumerator	line:43	enum:__anon37b356950103	file:
-Rotor	src/enigma_cli.c	/^} Rotor;$/;"	typedef	line:57	typeref:struct:__anon37b356950308	file:
+REVERSE	src/enigma_cli.c	/^    REVERSE,$/;"	enumerator	line:61	enum:__anon37b356950103	file:
+ROTOR_I	src/enigma_cli.c	/^static const Rotor ROTOR_I    = {{"EKMFLGDQVZNTOWYHXUSPAIBRCJ"}, {"UWYGADFPVZBECKMTHXSLRINQOJ"},/;"	variable	line:99	typeref:typename:const Rotor	file:
+ROTOR_II	src/enigma_cli.c	/^static const Rotor ROTOR_II   = {{"AJDKSIRUXBLHWTMCQGZNPYFVOE"}, {"AJPCZWRLFBDKOTYUQGENHXMIVS"},/;"	variable	line:100	typeref:typename:const Rotor	file:
+ROTOR_III	src/enigma_cli.c	/^static const Rotor ROTOR_III  = {{"BDFHJLCPRTXVZNYEIWGAKMUSQO"}, {"TAGBPCSDQEUFVNZHYIXJWLRKOM"},/;"	variable	line:101	typeref:typename:const Rotor	file:
+ROTOR_IV	src/enigma_cli.c	/^static const Rotor ROTOR_IV   = {{"ESOVPZJAYQUIRHXLNFTGKDCMWB"}, {"HZWVARTNLGUPXQCEJMBSKDYOIF"},/;"	variable	line:102	typeref:typename:const Rotor	file:
+ROTOR_V	src/enigma_cli.c	/^static const Rotor ROTOR_V    = {{"VZBRGITYUPSDNHLXAWMJQOFECK"}, {"QCYLXWENFTZOSMVJUDKGIARPHB"},/;"	variable	line:103	typeref:typename:const Rotor	file:
+ROTOR_VI	src/enigma_cli.c	/^static const Rotor ROTOR_VI   = {{"JPGVOUMFYQBENHZRDKASXLICTW"}, {"SKXQLHCNWARVGMEBJPTYFDZUIO"},/;"	variable	line:104	typeref:typename:const Rotor	file:
+ROTOR_VII	src/enigma_cli.c	/^static const Rotor ROTOR_VII  = {{"NZJHGRCXMYSWBOUFAIVLPEKQDT"}, {"QMGYVPEDRCWTIANUXFKZOSLHJB"},/;"	variable	line:105	typeref:typename:const Rotor	file:
+ROTOR_VIII	src/enigma_cli.c	/^static const Rotor ROTOR_VIII = {{"FKQHTLXOCBJSPDZRAMEWNIUYGV"}, {"QJINSAYDVKBFRUHMCPLEWZTGXO"},/;"	variable	line:106	typeref:typename:const Rotor	file:
+Rotor	src/enigma_cli.c	/^} Rotor;$/;"	typedef	line:84	typeref:struct:__anon37b356950308	file:
+SCRATCH_BUF_SIZE	src/enigma_cli.c	/^#define SCRATCH_BUF_SIZE /;"	macro	line:40	file:
 TEST	include/hgl_test.h	/^#define TEST(/;"	macro	line:236	signature:(name_,...)
-TEST	test/test.c	/^TEST(test_default_configuration) {$/;"	function	line:6	signature:(test_default_configuration)
 TEST_EXIT_ASSERT_FAIL	include/hgl_test.h	/^#define TEST_EXIT_ASSERT_FAIL /;"	macro	line:159
 TEST_EXIT_CAUGHT_EXPECTED_SIGNAL	include/hgl_test.h	/^#define TEST_EXIT_CAUGHT_EXPECTED_SIGNAL /;"	macro	line:160
 TEST_EXIT_SUCCESS	include/hgl_test.h	/^#define TEST_EXIT_SUCCESS /;"	macro	line:158
 TEST_EXPECT_OUTPUT_FAIL	include/hgl_test.h	/^#define TEST_EXPECT_OUTPUT_FAIL /;"	macro	line:163
 TEST_EXPECT_SIGNAL_FAIL	include/hgl_test.h	/^#define TEST_EXPECT_SIGNAL_FAIL /;"	macro	line:164
 TEST_GOT_UNEXPECTED_SIGNAL_FAIL	include/hgl_test.h	/^#define TEST_GOT_UNEXPECTED_SIGNAL_FAIL /;"	macro	line:165
-TO_UPPER	src/enigma_cli.c	/^#define TO_UPPER(/;"	macro	line:24	file:	signature:(c)
-Wiring	src/enigma_cli.c	/^} Wiring;$/;"	typedef	line:48	typeref:struct:__anon37b356950208	file:
+TO_UPPER	src/enigma_cli.c	/^#define TO_UPPER(/;"	macro	line:25	file:	signature:(c)
+UKW_A	src/enigma_cli.c	/^static const Permutation UKW_A = {"EJMZALYXVBWFCRQUONTSPIKHGD"};$/;"	variable	line:108	typeref:typename:const Permutation	file:
+UKW_B	src/enigma_cli.c	/^static const Permutation UKW_B = {"YRUHQSLDPXNGOKMIEBFZCWVJAT"};$/;"	variable	line:109	typeref:typename:const Permutation	file:
+UKW_C	src/enigma_cli.c	/^static const Permutation UKW_C = {"FVPJIAOYEDRZXWGCTKUQSBNMHL"};$/;"	variable	line:110	typeref:typename:const Permutation	file:
 YELLOW	include/hgl_flags.h	/^#define YELLOW /;"	macro	line:225
 _POSIX_C_SOURCE	include/hgl_test.h	/^#define _POSIX_C_SOURCE /;"	macro	line:137
-__anon37b356950103	src/enigma_cli.c	/^typedef enum {$/;"	enum	line:41	file:
-__anon37b356950208	src/enigma_cli.c	/^typedef struct {$/;"	struct	line:46	file:
-__anon37b356950308	src/enigma_cli.c	/^typedef struct {$/;"	struct	line:50	file:
-__anon37b356950408	src/enigma_cli.c	/^typedef struct {$/;"	struct	line:64	file:
+__anon37b356950103	src/enigma_cli.c	/^typedef enum {$/;"	enum	line:59	file:
+__anon37b356950208	src/enigma_cli.c	/^typedef struct {$/;"	struct	line:73	file:
+__anon37b356950308	src/enigma_cli.c	/^typedef struct {$/;"	struct	line:77	file:
+__anon37b356950408	src/enigma_cli.c	/^typedef struct {$/;"	struct	line:91	file:
 __anon438705ff0103	include/hgl_string.h	/^typedef enum {$/;"	enum	line:118
 __anon438705ff0208	include/hgl_string.h	/^typedef struct {$/;"	struct	line:124
 __anon438705ff0308	include/hgl_string.h	/^typedef struct {$/;"	struct	line:131
@@ -102,27 +114,42 @@ __anon5ace28b50308	include/hgl_flags.h	/^{$/;"	struct	line:124
 __anon70876d680108	include/hgl_test.h	/^{$/;"	struct	line:302
 __anon70876d680208	include/hgl_test.h	/^    struct {$/;"	struct	line:303	struct:__anon70876d680108
 all	makefile	/^all: enigma-cli enigma-test$/;"	target	line:14
-apply_indicator_setting	src/enigma_cli.c	/^static void apply_indicator_setting(Enigma *enigma, const char *str)$/;"	function	line:270	typeref:typename:void	file:	signature:(Enigma * enigma,const char * str)
-apply_plugboard_setting	src/enigma_cli.c	/^static void apply_plugboard_setting(Enigma *enigma, const char *str)$/;"	function	line:237	typeref:typename:void	file:	signature:(Enigma * enigma,const char * str)
-apply_reflector_setting	src/enigma_cli.c	/^static void apply_reflector_setting(Enigma *enigma, const char *str)$/;"	function	line:162	typeref:typename:void	file:	signature:(Enigma * enigma,const char * str)
-apply_ring_setting	src/enigma_cli.c	/^static void apply_ring_setting(Enigma *enigma, const char *str)$/;"	function	line:216	typeref:typename:void	file:	signature:(Enigma * enigma,const char * str)
-apply_rotor_setting	src/enigma_cli.c	/^static void apply_rotor_setting(Enigma *enigma, const char *str)$/;"	function	line:180	typeref:typename:void	file:	signature:(Enigma * enigma,const char * str)
+apply_indicator_setting	src/enigma_cli.c	/^static void apply_indicator_setting(Enigma *enigma, const char *str)$/;"	function	line:369	typeref:typename:void	file:	signature:(Enigma * enigma,const char * str)
+apply_plugboard_setting	src/enigma_cli.c	/^static void apply_plugboard_setting(Enigma *enigma, const char *str)$/;"	function	line:330	typeref:typename:void	file:	signature:(Enigma * enigma,const char * str)
+apply_reflector_setting	src/enigma_cli.c	/^static void apply_reflector_setting(Enigma *enigma, const char *str)$/;"	function	line:253	typeref:typename:void	file:	signature:(Enigma * enigma,const char * str)
+apply_ring_setting	src/enigma_cli.c	/^static void apply_ring_setting(Enigma *enigma, const char *str)$/;"	function	line:305	typeref:typename:void	file:	signature:(Enigma * enigma,const char * str)
+apply_rotor_setting	src/enigma_cli.c	/^static void apply_rotor_setting(Enigma *enigma, const char *str)$/;"	function	line:274	typeref:typename:void	file:	signature:(Enigma * enigma,const char * str)
+argc	test/test.c	/^    int argc = sizeof(argv) \/ sizeof(argv[0]); $/;"	variable	line:102	typeref:typename:int
+argc	test/test.c	/^    int argc = sizeof(argv) \/ sizeof(argv[0]); $/;"	variable	line:112	typeref:typename:int
+argc	test/test.c	/^    int argc = sizeof(argv) \/ sizeof(argv[0]); $/;"	variable	line:128	typeref:typename:int
+argc	test/test.c	/^    int argc = sizeof(argv) \/ sizeof(argv[0]); $/;"	variable	line:42	typeref:typename:int
+argc	test/test.c	/^    int argc = sizeof(argv) \/ sizeof(argv[0]); $/;"	variable	line:82	typeref:typename:int
+argc	test/test.c	/^    int argc = sizeof(argv) \/ sizeof(argv[0]); $/;"	variable	line:92	typeref:typename:int
+argv	test/test.c	/^    char *argv[] = {"0", "--rotors", "III II I", "--indicator-setting", "ADO"};$/;"	variable	line:111	typeref:typename:char * []
+argv	test/test.c	/^    char *argv[] = {"0"};$/;"	variable	line:101	typeref:typename:char * []
+argv	test/test.c	/^    char *argv[] = {"0"};$/;"	variable	line:41	typeref:typename:char * []
+argv	test/test.c	/^    char *argv[] = {"0"};$/;"	variable	line:81	typeref:typename:char * []
+argv	test/test.c	/^    char *argv[] = {"0"};$/;"	variable	line:91	typeref:typename:char * []
+argv	test/test.c	/^    char *argv[] = {$/;"	variable	line:121	typeref:typename:char * []
 b	include/hgl_flags.h	/^    bool b;$/;"	member	line:116	union:__anon5ace28b5020a	typeref:typename:bool
 capacity	include/hgl_string.h	/^    size_t capacity;     \/* total capacity, including null terminator *\/$/;"	member	line:127	struct:__anon438705ff0208	typeref:typename:size_t
 clean	makefile	/^clean:$/;"	target	line:22
 cstr	include/hgl_string.h	/^    char *cstr;          \/* null-terminated string *\/$/;"	member	line:125	struct:__anon438705ff0208	typeref:typename:char *
 default_value	include/hgl_flags.h	/^    HglFlagValue default_value; \/\/ can fit any flag value type$/;"	member	line:128	struct:__anon5ace28b50308	typeref:typename:HglFlagValue
 desc	include/hgl_flags.h	/^    const char *desc;$/;"	member	line:127	struct:__anon5ace28b50308	typeref:typename:const char *
-encrypt_char	src/enigma_cli.c	/^uint8_t encrypt_char(Enigma *enigma, char c)$/;"	function	line:135	typeref:typename:uint8_t	signature:(Enigma * enigma,char c)
+encrypt_char	src/enigma_cli.c	/^u8 encrypt_char(Enigma *enigma, char c)$/;"	function	line:225	typeref:typename:u8	signature:(Enigma * enigma,char c)
+encrypt_str	src/enigma_cli.c	/^size_t encrypt_str(Enigma *enigma, char *output, const char *input)$/;"	function	line:197	typeref:typename:size_t	signature:(Enigma * enigma,char * output,const char * input)
 enigma-cli	README.md	/^# enigma-cli/;"	chapter	line:1
 enigma-cli	makefile	/^enigma-cli:$/;"	target	line:16
 enigma-test	makefile	/^enigma-test:$/;"	target	line:19
-enigma_cli_main	src/enigma_cli.c	/^int enigma_cli_main(int argc, char *argv[])$/;"	function	line:88	typeref:typename:int	signature:(int argc,char * argv[])
+enigma_cli_main	src/enigma_cli.c	/^int enigma_cli_main(int argc, char *argv[])$/;"	function	line:134	typeref:typename:int	signature:(int argc,char * argv[])
 expect_fail	include/hgl_test.h	/^    bool        expect_fail;   \/\/ Expect test to fail. Reports failure as success and vice ver/;"	member	line:315	struct:__anon70876d680108	typeref:typename:bool
 expect_output	include/hgl_test.h	/^    const char *expect_output; \/\/ Expect test to terminate with `expect_output` on "stdout".$/;"	member	line:313	struct:__anon70876d680108	typeref:typename:const char *
 expect_signal	include/hgl_test.h	/^    int         expect_signal; \/\/ Expect test to exit with signal, otherwise fail test. E.g. `/;"	member	line:314	struct:__anon70876d680108	typeref:typename:int
+f32	src/enigma_cli.c	/^typedef float    f32;$/;"	typedef	line:52	typeref:typename:float	file:
 f64	include/hgl_flags.h	/^    double f64;$/;"	member	line:119	union:__anon5ace28b5020a	typeref:typename:double
-forward	src/enigma_cli.c	/^    Wiring forward;$/;"	member	line:51	struct:__anon37b356950308	typeref:typename:Wiring	file:
+f64	src/enigma_cli.c	/^typedef double   f64;$/;"	typedef	line:53	typeref:typename:double	file:
+forward	src/enigma_cli.c	/^    Permutation forward;$/;"	member	line:78	struct:__anon37b356950308	typeref:typename:Permutation	file:
 hgl_flag_create_	include/hgl_flags.h	/^HglFlag *hgl_flag_create_(HglFlagKind kind, const char *names, const char *desc,$/;"	function	line:235	typeref:typename:HglFlag *	signature:(HglFlagKind kind,const char * names,const char * desc,HglFlagValue default_value,uint32_t opts,HglFlagValue range_min,HglFlagValue range_max)
 hgl_flags_	include/hgl_flags.h	/^static HglFlag hgl_flags_[HGL_FLAGS_MAX_N_FLAGS] = {0};$/;"	variable	line:228	typeref:typename:HglFlag[]
 hgl_flags_add_bool	include/hgl_flags.h	/^bool *hgl_flags_add_bool(const char *names, const char *desc, bool default_value, uint32_t opts)$/;"	function	line:254	typeref:typename:bool *	signature:(const char * names,const char * desc,bool default_value,uint32_t opts)
@@ -196,18 +223,24 @@ hgl_test_read_file	include/hgl_test.h	/^char *hgl_test_read_file(const char *fil
 hgl_test_run_test	include/hgl_test.h	/^void hgl_test_run_test(HglTest *test)$/;"	function	line:440	typeref:typename:void	signature:(HglTest * test)
 hgl_test_signal_handler	include/hgl_test.h	/^void hgl_test_signal_handler(int sig)$/;"	function	line:386	typeref:typename:void	signature:(int sig)
 hidden	include/hgl_test.h	/^    } hidden; \/* i.e. don't tuch this *\/$/;"	member	line:309	struct:__anon70876d680108	typeref:struct:__anon70876d680108::__anon70876d680208
+i16	src/enigma_cli.c	/^typedef int16_t  i16;$/;"	typedef	line:49	typeref:typename:int16_t	file:
+i32	src/enigma_cli.c	/^typedef int32_t  i32;$/;"	typedef	line:50	typeref:typename:int32_t	file:
 i64	include/hgl_flags.h	/^    int64_t i64;$/;"	member	line:118	union:__anon5ace28b5020a	typeref:typename:int64_t
+i64	src/enigma_cli.c	/^typedef int64_t  i64;$/;"	typedef	line:51	typeref:typename:int64_t	file:
+i8	src/enigma_cli.c	/^typedef int8_t    i8;$/;"	typedef	line:48	typeref:typename:int8_t	file:
 id	include/hgl_test.h	/^        uint32_t id;$/;"	member	line:307	struct:__anon70876d680108::__anon70876d680208	typeref:typename:uint32_t
+image	src/enigma_cli.c	/^    u8 image[26];$/;"	member	line:74	struct:__anon37b356950208	typeref:typename:u8[26]	file:
 input	include/hgl_test.h	/^    const char *input;         \/\/ Start test with `input` on "stdin".$/;"	member	line:312	struct:__anon70876d680108	typeref:typename:const char *
+is_at_turnover	src/enigma_cli.c	/^static bool is_at_turnover(const Rotor *r)$/;"	function	line:393	typeref:typename:bool	file:	signature:(const Rotor * r)
 is_delimiting_char_	include/hgl_flags.h	/^static inline bool is_delimiting_char_(char c)$/;"	function	line:320	typeref:typename:bool	signature:(char c)
 it_	include/hgl_string.h	/^    size_t it_;          \/* gen. purpose iterator for reentrant string view ops. *\/$/;"	member	line:134	struct:__anon438705ff0308	typeref:typename:size_t
 kind	include/hgl_flags.h	/^    HglFlagKind kind;$/;"	member	line:125	struct:__anon5ace28b50308	typeref:typename:HglFlagKind
 length	include/hgl_string.h	/^    size_t length;       \/* length of `cstr` excluding null terminator *\/$/;"	member	line:126	struct:__anon438705ff0208	typeref:typename:size_t
 length	include/hgl_string.h	/^    size_t length;       \/* length of string view, excluding null terminator *\/$/;"	member	line:133	struct:__anon438705ff0308	typeref:typename:size_t
-lex_letter	src/enigma_cli.c	/^static size_t lex_letter(HglStringView sv)$/;"	function	line:324	typeref:typename:size_t	file:	signature:(HglStringView sv)
-lex_numeric	src/enigma_cli.c	/^static size_t lex_numeric(HglStringView sv)$/;"	function	line:310	typeref:typename:size_t	file:	signature:(HglStringView sv)
+lex_letter	src/enigma_cli.c	/^static size_t lex_letter(HglStringView sv)$/;"	function	line:443	typeref:typename:size_t	file:	signature:(HglStringView sv)
+lex_numeric	src/enigma_cli.c	/^static size_t lex_numeric(HglStringView sv)$/;"	function	line:426	typeref:typename:size_t	file:	signature:(HglStringView sv)
 main	include/hgl_test.h	/^int main(int argc, char *argv[])$/;"	function	line:582	typeref:typename:int	signature:(int argc,char * argv[])
-main	src/enigma_cli.c	/^int main(int argc, char *argv[])$/;"	function	line:339	typeref:typename:int	signature:(int argc,char * argv[])
+main	src/enigma_cli.c	/^int main(int argc, char *argv[])$/;"	function	line:462	typeref:typename:int	signature:(int argc,char * argv[])
 max	include/hgl_flags.h	/^#define max(/;"	macro	line:220	signature:(a,b)
 min	include/hgl_flags.h	/^#define min(/;"	macro	line:221	signature:(a,b)
 name	include/hgl_test.h	/^        const char *name;$/;"	member	line:304	struct:__anon70876d680108::__anon70876d680208	typeref:typename:const char *
@@ -215,14 +248,14 @@ names	include/hgl_flags.h	/^    const char *names;$/;"	member	line:126	struct:__
 opts	include/hgl_flags.h	/^    uint32_t opts;$/;"	member	line:132	struct:__anon5ace28b50308	typeref:typename:uint32_t
 parse_order	include/hgl_flags.h	/^    int16_t parse_order;$/;"	member	line:134	struct:__anon5ace28b50308	typeref:typename:int16_t
 pass	include/hgl_test.h	/^        bool pass;$/;"	member	line:308	struct:__anon70876d680108::__anon70876d680208	typeref:typename:bool
-plugboard	src/enigma_cli.c	/^    Wiring plugboard;$/;"	member	line:67	struct:__anon37b356950408	typeref:typename:Wiring	file:
-position	src/enigma_cli.c	/^    uint8_t position;$/;"	member	line:56	struct:__anon37b356950308	typeref:typename:uint8_t	file:
+plugboard	src/enigma_cli.c	/^    Permutation plugboard;$/;"	member	line:94	struct:__anon37b356950408	typeref:typename:Permutation	file:
+position	src/enigma_cli.c	/^    u8 position;$/;"	member	line:83	struct:__anon37b356950308	typeref:typename:u8	file:
 range_max	include/hgl_flags.h	/^    HglFlagValue range_max;$/;"	member	line:131	struct:__anon5ace28b50308	typeref:typename:HglFlagValue
 range_min	include/hgl_flags.h	/^    HglFlagValue range_min;$/;"	member	line:130	struct:__anon5ace28b50308	typeref:typename:HglFlagValue
-reflector	src/enigma_cli.c	/^    Wiring reflector;$/;"	member	line:66	struct:__anon37b356950408	typeref:typename:Wiring	file:
+reflector	src/enigma_cli.c	/^    Permutation reflector;$/;"	member	line:93	struct:__anon37b356950408	typeref:typename:Permutation	file:
 result	include/hgl_test.h	/^        uint32_t result;$/;"	member	line:306	struct:__anon70876d680108::__anon70876d680208	typeref:typename:uint32_t
-reverse	src/enigma_cli.c	/^    Wiring reverse;$/;"	member	line:52	struct:__anon37b356950308	typeref:typename:Wiring	file:
-ring_setting	src/enigma_cli.c	/^    uint8_t ring_setting;$/;"	member	line:55	struct:__anon37b356950308	typeref:typename:uint8_t	file:
+reverse	src/enigma_cli.c	/^    Permutation reverse;$/;"	member	line:79	struct:__anon37b356950308	typeref:typename:Permutation	file:
+ring_setting	src/enigma_cli.c	/^    u8 ring_setting;$/;"	member	line:82	struct:__anon37b356950308	typeref:typename:u8	file:
 rot1	tools/wiring.py	/^rot1 = "EKMFLGDQVZNTOWYHXUSPAIBRCJ"$/;"	variable	line:3
 rot2	tools/wiring.py	/^rot2 = "AJDKSIRUXBLHWTMCQGZNPYFVOE"$/;"	variable	line:4
 rot3	tools/wiring.py	/^rot3 = "BDFHJLCPRTXVZNYEIWGAKMUSQO"$/;"	variable	line:5
@@ -231,16 +264,20 @@ rot5	tools/wiring.py	/^rot5 = "VZBRGITYUPSDNHLXAWMJQOFECK"$/;"	variable	line:7
 rot6	tools/wiring.py	/^rot6 = "JPGVOUMFYQBENHZRDKASXLICTW"$/;"	variable	line:8
 rot7	tools/wiring.py	/^rot7 = "NZJHGRCXMYSWBOUFAIVLPEKQDT"$/;"	variable	line:9
 rot8	tools/wiring.py	/^rot8 = "FKQHTLXOCBJSPDZRAMEWNIUYGV"$/;"	variable	line:10
-rotor	src/enigma_cli.c	/^    Rotor rotor[3];$/;"	member	line:65	struct:__anon37b356950408	typeref:typename:Rotor[3]	file:
-rotor_pass	src/enigma_cli.c	/^static uint8_t rotor_pass(const Rotor *r, uint8_t n, Direction dir)$/;"	function	line:296	typeref:typename:uint8_t	file:	signature:(const Rotor * r,uint8_t n,Direction dir)
+rotor	src/enigma_cli.c	/^    Rotor rotor[3];$/;"	member	line:92	struct:__anon37b356950408	typeref:typename:Rotor[3]	file:
+rotor_pass	src/enigma_cli.c	/^static u8 rotor_pass(const Rotor *r, u8 n, Direction dir)$/;"	function	line:412	typeref:typename:u8	file:	signature:(const Rotor * r,u8 n,Direction dir)
 setup	include/hgl_test.h	/^    void (*setup)(void);       \/\/ Specify a test-specific setup function to be run before the /;"	member	line:316	struct:__anon70876d680108	typeref:typename:void (*)(void)
 start	include/hgl_string.h	/^    const char *start;   \/* optionally null-terminated string *\/$/;"	member	line:132	struct:__anon438705ff0308	typeref:typename:const char *
 status	include/hgl_flags.h	/^    uint16_t status;$/;"	member	line:133	struct:__anon5ace28b50308	typeref:typename:uint16_t
+step_rotor	src/enigma_cli.c	/^static void step_rotor(Rotor *r)$/;"	function	line:402	typeref:typename:void	file:	signature:(Rotor * r)
 str	include/hgl_flags.h	/^    const char *str;$/;"	member	line:120	union:__anon5ace28b5020a	typeref:typename:const char *
 teardown	include/hgl_test.h	/^    void (*teardown)(void);    \/\/ Specify a test-specific teardown function to be run after th/;"	member	line:317	struct:__anon70876d680108	typeref:typename:void (*)(void)
 test_fn	include/hgl_test.h	/^        void (*test_fn)(void);$/;"	member	line:305	struct:__anon70876d680108::__anon70876d680208	typeref:typename:void (*)(void)
-turnover1	src/enigma_cli.c	/^    uint8_t turnover1;$/;"	member	line:53	struct:__anon37b356950308	typeref:typename:uint8_t	file:
-turnover2	src/enigma_cli.c	/^    uint8_t turnover2; \/* only valid for rotors VI, VII, and VIII *\/$/;"	member	line:54	struct:__anon37b356950308	typeref:typename:uint8_t	file:
+turnover1	src/enigma_cli.c	/^    u8 turnover1;$/;"	member	line:80	struct:__anon37b356950308	typeref:typename:u8	file:
+turnover2	src/enigma_cli.c	/^    u8 turnover2; \/* only valid for rotors VI, VII, and VIII *\/$/;"	member	line:81	struct:__anon37b356950308	typeref:typename:u8	file:
+u16	src/enigma_cli.c	/^typedef uint16_t u16;$/;"	typedef	line:45	typeref:typename:uint16_t	file:
+u32	src/enigma_cli.c	/^typedef uint32_t u32;$/;"	typedef	line:46	typeref:typename:uint32_t	file:
 u64	include/hgl_flags.h	/^    uint64_t u64;$/;"	member	line:117	union:__anon5ace28b5020a	typeref:typename:uint64_t
+u64	src/enigma_cli.c	/^typedef uint64_t u64;$/;"	typedef	line:47	typeref:typename:uint64_t	file:
+u8	src/enigma_cli.c	/^typedef uint8_t   u8;$/;"	typedef	line:44	typeref:typename:uint8_t	file:
 value	include/hgl_flags.h	/^    HglFlagValue value;         \/\/ -- || --$/;"	member	line:129	struct:__anon5ace28b50308	typeref:typename:HglFlagValue
-wiring	src/enigma_cli.c	/^    uint8_t wiring[26];$/;"	member	line:47	struct:__anon37b356950208	typeref:typename:uint8_t[26]	file:
