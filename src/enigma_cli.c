@@ -1,4 +1,40 @@
 
+/**
+ *
+ * MIT License
+ * 
+ * Copyright (c) 2025 Henrik A. Glass
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ * 
+ *
+ * ABOUT:
+ * 
+ * Enigma-cli implements a simulation of the Enigma M3 cipher machine used by
+ * the German military to send secret messages during WWII. Enimga-cli is usable
+ * entirely from the command-line.
+ *
+ *
+ * AUTHOR: Henrik A. Glass
+ *
+ */
+
 /*--- Include files ---------------------------------------------------------------------*/
 
 #include <stdio.h>
@@ -49,12 +85,6 @@ typedef int8_t    i8;
 typedef int16_t  i16;
 typedef int32_t  i32;
 typedef int64_t  i64;
-typedef float    f32;
-typedef double   f64;
-
-/* just in case... */
-static_assert(sizeof(float) == 4, "");
-static_assert(sizeof(double) == 8, "");
 
 typedef enum {
     FORWARD,
@@ -62,21 +92,31 @@ typedef enum {
 } Direction;
 
 /**
- * Represents a permutation on the set of letters in the enigma alphabet.
- * `image[26]` represents the image of the permutation in alphabetical 
+ * Represents a substitution on the set of letters in the enigma alphabet.
+ * `image[26]` represents the image of the substitution in alphabetical 
  * order. I.e. using Cauchy's two-line notation:
  *
  *     | ABCDEFGHIJKLMNOPQRSTUVWXYZ |
  *     |         image[26]          |
  *
+ * E.g. a ROT13 cipher would look like this:
+ *
+ *     | ABCDEFGHIJKLMNOPQRSTUVWXYZ |
+ *     | NOPQRSTUVWXYZABCDEFGHIJKLM |
+ *
  */
 typedef struct {
     u8 image[26];
-} Permutation;
+} Substitution;
 
+/* 
+ * Represents an Enigma machine rotor including its ring setting and 
+ * position (even though, strictly speaking, the rotor position is not
+ * an attribute of the actual rotor).
+ */
 typedef struct {
-    Permutation forward;
-    Permutation reverse;
+    Substitution forward;
+    Substitution reverse;
     u8 turnover1;
     u8 turnover2; /* only valid for rotors VI, VII, and VIII */
     u8 ring_setting;
@@ -84,18 +124,28 @@ typedef struct {
 } Rotor;
 
 /* 
+ * Represents an Enigma M3 machine.
+ *
  * Note: Rotors are indexed from left to right as seen from the perspective of the 
  *       machine operator; i.e. rotor[0] is the leftmost (slow) rotor, and rotor[2] 
  *       is the rightmost (fast) rotor.
  */
 typedef struct {
     Rotor rotor[3];
-    Permutation reflector;
-    Permutation plugboard;
+    Substitution reflector;
+    Substitution plugboard;
 } Enigma;
 
 /*--- Private constants -----------------------------------------------------------------*/
 
+/**
+ * These are the 8 different rotor supplied with the Enigma M3. The last three rotors were
+ * only used by the german navy (Kriegsmarine) and have, whilst the the first five were used
+ * by all branches of the German Forces, including the navy. The navy's rotors (VI, VII, and 
+ * VII) are special because they have two turnover notches, meaning for every complete 
+ * revolution of such a rotor, the rotor to the left of it will have stepped at least twice (
+ * I write "at least" here, because of the peculiar double-stepping quirk of the Enigma).
+ */
 static const Rotor ROTOR_I    = {{"EKMFLGDQVZNTOWYHXUSPAIBRCJ"}, {"UWYGADFPVZBECKMTHXSLRINQOJ"}, C2N('Q'), 255 /* no second turnover */, 0, 0};
 static const Rotor ROTOR_II   = {{"AJDKSIRUXBLHWTMCQGZNPYFVOE"}, {"AJPCZWRLFBDKOTYUQGENHXMIVS"}, C2N('E'), 255 /* no second turnover */, 0, 0};
 static const Rotor ROTOR_III  = {{"BDFHJLCPRTXVZNYEIWGAKMUSQO"}, {"TAGBPCSDQEUFVNZHYIXJWLRKOM"}, C2N('V'), 255 /* no second turnover */, 0, 0};
@@ -105,11 +155,17 @@ static const Rotor ROTOR_VI   = {{"JPGVOUMFYQBENHZRDKASXLICTW"}, {"SKXQLHCNWARVG
 static const Rotor ROTOR_VII  = {{"NZJHGRCXMYSWBOUFAIVLPEKQDT"}, {"QMGYVPEDRCWTIANUXFKZOSLHJB"}, C2N('Z'), C2N('M'), 0, 0};
 static const Rotor ROTOR_VIII = {{"FKQHTLXOCBJSPDZRAMEWNIUYGV"}, {"QJINSAYDVKBFRUHMCPLEWZTGXO"}, C2N('Z'), C2N('M'), 0, 0};
 
-static const Permutation UKW_A = {"EJMZALYXVBWFCRQUONTSPIKHGD"};
-static const Permutation UKW_B = {"YRUHQSLDPXNGOKMIEBFZCWVJAT"};
-static const Permutation UKW_C = {"FVPJIAOYEDRZXWGCTKUQSBNMHL"};
+/**
+ * These are three reflectors (Umkehrwalze) used in various versions of the Enigma machine.
+ * Typically, for the M3 variant, either UKW-B or UKW-C were used. Later in the war, the
+ * germans developed the UKW-D rewireable reflector. I'll probably add this in the future
+ * when I'm bored. Info: https://www.cryptomuseum.com/crypto/enigma/ukwd/
+ */
+static const Substitution UKW_A = {"EJMZALYXVBWFCRQUONTSPIKHGD"};
+static const Substitution UKW_B = {"YRUHQSLDPXNGOKMIEBFZCWVJAT"};
+static const Substitution UKW_C = {"FVPJIAOYEDRZXWGCTKUQSBNMHL"};
 
-static const Permutation BARE_PLUGBOARD = {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"};
+static const Substitution BARE_PLUGBOARD = {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"};
 
 /*--- Function prototypes ---------------------------------------------------------------*/
 
@@ -131,6 +187,9 @@ static size_t lex_letter(HglStringView sv);
 
 /*--- Enigma functions ------------------------------------------------------------------*/
 
+/**
+ * Consider this the entry point of the program. See the actual main function for more info.
+ */
 int enigma_cli_main(int argc, char *argv[])
 {
     /* Enigma machine simulation settings */
@@ -405,7 +464,7 @@ static void step_rotor(Rotor *r)
 }
 
 /**
- * Returns the image of 'n' under the permutation given by the rotor `r` (including rotor 
+ * Returns the image of 'n' under the substitution given by the rotor `r` (including rotor 
  * position and ring setting) and the current flow direction `dir` through the rotor, where
  * `n` is the numerical encoding of a letter in the Enigma alphabet.
  */
