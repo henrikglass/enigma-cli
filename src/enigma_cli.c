@@ -28,7 +28,32 @@
  * 
  * Enigma-cli implements a simulation of the Enigma M3 cipher machine used by
  * the German military to send secret messages during WWII. Enimga-cli is usable
- * entirely from the command-line.
+ * entirely from the command-line and accepts input on STDIN.
+ *
+ *
+ * USAGE:
+ *
+ *     Usage: ./enigma-cli [Options]
+ *     Options:
+ *       -u,--reflector,--umkehrwalze Reflector (Ger: Umkehrwalze) (default = "UKW-B")
+ *       -w,--rotors,--walzenlage Rotor order (Ger: Walzenlage) (default = "I II III")
+ *       -r,--ring-setting,--ringstellung Ring setting (Ger: Ringstellung) (default = "1 1 1")
+ *       -s,--plugboard-setting,--steckerverbindungen Plugboard transpositions (Ger: Steckerverbindungen) (default = "")
+ *       -g,--indicator-setting,--grundstellung Indicator setting (Ger: Grundstellung) (default = "1 1 1")
+ *       --help,--hilfe           Displays this message (default = 0)
+ *
+ * EXAMPLE:
+ *
+ * To set up the machine according to the "Armee-Stabs-Maschinenschlüssel Nr.28"
+ * procedures for October 1st 1944, assuming the machine is fitted with an UKW-C
+ * reflector, and assuming an operator-chosen initial indicator setting "HAG",
+ * run enimga-cli like this:
+ *
+ *     $ ./enigma-cli -u "UKW-C" -w "II IV I" -r "6 17 26" -s "AC LS BQ WN MY UV FJ PZ TR OK" -g "HAG"
+ *
+ * Link to procedures sheet: 
+ *
+ * https://web.archive.org/web/20250606093439/https://www.ciphermachinesandcryptology.com/img/enigma/hires-wehrmachtkey-stab.jpg
  *
  *
  * AUTHOR: Henrik A. Glass
