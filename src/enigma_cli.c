@@ -35,12 +35,12 @@
  *
  *     Usage: ./enigma-cli [Options]
  *     Options:
- *       -u,--reflector,--umkehrwalze Reflector (Ger: Umkehrwalze) (default = "UKW-B")
- *       -w,--rotors,--walzenlage Rotor order (Ger: Walzenlage) (default = "I II III")
- *       -r,--ring-setting,--ringstellung Ring setting (Ger: Ringstellung) (default = "1 1 1")
- *       -s,--plugboard-setting,--steckerverbindungen Plugboard transpositions (Ger: Steckerverbindungen) (default = "")
- *       -g,--indicator-setting,--grundstellung Indicator setting (Ger: Grundstellung) (default = "1 1 1")
- *       --help,--hilfe           Displays this message (default = 0)
+ *       -u,--reflector,--umkehrwalze                     Reflector (Ger: Umkehrwalze) (default = "UKW-B")
+ *       -w,--rotors,--walzenlage                         Rotor order (Ger: Walzenlage) (default = "I II III")
+ *       -r,--ring-setting,--ringstellung                 Ring setting (Ger: Ringstellung) (default = "1 1 1")
+ *       -s,--plugboard-setting,--steckerverbindungen     Plugboard transpositions (Ger: Steckerverbindungen) (default = "")
+ *       -g,--indicator-setting,--grundstellung           Indicator setting (Ger: Grundstellung) (default = "1 1 1")
+ *       --help,--hilfe                                   Displays this message (default = 0)
  *
  * EXAMPLE:
  *
@@ -72,6 +72,7 @@
  *       implementation of hgl_flags.h, meaning we can't include it here.
  */
 #ifndef HGL_TEST_H
+#  define HGL_FLAGS_PRINT_MARGIN 48
 #  define HGL_FLAGS_IMPLEMENTATION
 #  include "hgl_flags.h"
 #endif
@@ -81,22 +82,21 @@
 
 /*--- Private macros --------------------------------------------------------------------*/
 
-#define C2N(c) ((c) - 'A') // maps A-Z  --> 0-25
-#define N2C(n) ((n) + 'A') // maps 0-25 --> A->Z
-#define TO_UPPER(c) (((c) >= 'a' && (c) <= 'z') ? ((c) - 0x20) : (c))
-#define IN_ALPHABET(c) ((c) >= 'A' && (c) <= 'Z') 
-#define ENIGMA_ASSERT(cond, ...)               \
-    if (!(cond)) {                             \
-        fprintf(stderr, "Error:" __VA_ARGS__); \
-        fprintf(stderr, "\n");                 \
-        exit(1);                               \
+#define ENIGMA_ASSERT(cond, ...)                \
+    if (!(cond)) {                              \
+        fprintf(stderr, "Error: " __VA_ARGS__); \
+        fprintf(stderr, "\n");                  \
+        exit(1);                                \
     }
-#define ENIGMA_ERROR(...)                      \
-    do {                                       \
-        fprintf(stderr, "Error:" __VA_ARGS__); \
-        fprintf(stderr, "\n");                 \
-        exit(1);                               \
+#define ENIGMA_ERROR(...)                       \
+    do {                                        \
+        fprintf(stderr, "Error: " __VA_ARGS__); \
+        fprintf(stderr, "\n");                  \
+        exit(1);                                \
     } while (0)
+
+#define ENCODE(c) ((c) - 'A') // maps A-Z  --> 0-25
+#define DECODE(n) ((n) + 'A') // maps 0-25 --> A->Z
 
 #define SCRATCH_BUF_SIZE (16 * 1024 * 1024)
 
@@ -171,14 +171,14 @@ typedef struct {
  * revolution of such a rotor, the rotor to the left of it will have stepped at least twice (
  * I write "at least" here, because of the peculiar double-stepping quirk of the Enigma).
  */
-static const Rotor ROTOR_I    = {{"EKMFLGDQVZNTOWYHXUSPAIBRCJ"}, {"UWYGADFPVZBECKMTHXSLRINQOJ"}, C2N('Q'), 255 /* no second turnover */, 0, 0};
-static const Rotor ROTOR_II   = {{"AJDKSIRUXBLHWTMCQGZNPYFVOE"}, {"AJPCZWRLFBDKOTYUQGENHXMIVS"}, C2N('E'), 255 /* no second turnover */, 0, 0};
-static const Rotor ROTOR_III  = {{"BDFHJLCPRTXVZNYEIWGAKMUSQO"}, {"TAGBPCSDQEUFVNZHYIXJWLRKOM"}, C2N('V'), 255 /* no second turnover */, 0, 0};
-static const Rotor ROTOR_IV   = {{"ESOVPZJAYQUIRHXLNFTGKDCMWB"}, {"HZWVARTNLGUPXQCEJMBSKDYOIF"}, C2N('J'), 255 /* no second turnover */, 0, 0};
-static const Rotor ROTOR_V    = {{"VZBRGITYUPSDNHLXAWMJQOFECK"}, {"QCYLXWENFTZOSMVJUDKGIARPHB"}, C2N('Z'), 255 /* no second turnover */, 0, 0};
-static const Rotor ROTOR_VI   = {{"JPGVOUMFYQBENHZRDKASXLICTW"}, {"SKXQLHCNWARVGMEBJPTYFDZUIO"}, C2N('Z'), C2N('M'), 0, 0};
-static const Rotor ROTOR_VII  = {{"NZJHGRCXMYSWBOUFAIVLPEKQDT"}, {"QMGYVPEDRCWTIANUXFKZOSLHJB"}, C2N('Z'), C2N('M'), 0, 0};
-static const Rotor ROTOR_VIII = {{"FKQHTLXOCBJSPDZRAMEWNIUYGV"}, {"QJINSAYDVKBFRUHMCPLEWZTGXO"}, C2N('Z'), C2N('M'), 0, 0};
+static const Rotor ROTOR_I    = {{"EKMFLGDQVZNTOWYHXUSPAIBRCJ"}, {"UWYGADFPVZBECKMTHXSLRINQOJ"}, ENCODE('Q'), 255 /* no second turnover */, 0, 0};
+static const Rotor ROTOR_II   = {{"AJDKSIRUXBLHWTMCQGZNPYFVOE"}, {"AJPCZWRLFBDKOTYUQGENHXMIVS"}, ENCODE('E'), 255 /* no second turnover */, 0, 0};
+static const Rotor ROTOR_III  = {{"BDFHJLCPRTXVZNYEIWGAKMUSQO"}, {"TAGBPCSDQEUFVNZHYIXJWLRKOM"}, ENCODE('V'), 255 /* no second turnover */, 0, 0};
+static const Rotor ROTOR_IV   = {{"ESOVPZJAYQUIRHXLNFTGKDCMWB"}, {"HZWVARTNLGUPXQCEJMBSKDYOIF"}, ENCODE('J'), 255 /* no second turnover */, 0, 0};
+static const Rotor ROTOR_V    = {{"VZBRGITYUPSDNHLXAWMJQOFECK"}, {"QCYLXWENFTZOSMVJUDKGIARPHB"}, ENCODE('Z'), 255 /* no second turnover */, 0, 0};
+static const Rotor ROTOR_VI   = {{"JPGVOUMFYQBENHZRDKASXLICTW"}, {"SKXQLHCNWARVGMEBJPTYFDZUIO"}, ENCODE('Z'), ENCODE('M'), 0, 0};
+static const Rotor ROTOR_VII  = {{"NZJHGRCXMYSWBOUFAIVLPEKQDT"}, {"QMGYVPEDRCWTIANUXFKZOSLHJB"}, ENCODE('Z'), ENCODE('M'), 0, 0};
+static const Rotor ROTOR_VIII = {{"FKQHTLXOCBJSPDZRAMEWNIUYGV"}, {"QJINSAYDVKBFRUHMCPLEWZTGXO"}, ENCODE('Z'), ENCODE('M'), 0, 0};
 
 /**
  * These are three reflectors (Umkehrwalze) used in various versions of the Enigma machine.
@@ -190,25 +190,36 @@ static const Substitution UKW_A = {"EJMZALYXVBWFCRQUONTSPIKHGD"};
 static const Substitution UKW_B = {"YRUHQSLDPXNGOKMIEBFZCWVJAT"};
 static const Substitution UKW_C = {"FVPJIAOYEDRZXWGCTKUQSBNMHL"};
 
+/**
+ * By default, with no connections made at the plugboard, no substitutions are made.
+ */
 static const Substitution BARE_PLUGBOARD = {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"};
 
 /*--- Function prototypes ---------------------------------------------------------------*/
 
+/* Basic interface */
 int enigma_cli_main(int argc, char *argv[]);
-size_t encrypt_str(Enigma *enigma, char *output, const char *input);
-u8 encrypt_char(Enigma *enigma, char c);
+size_t encipher_str(Enigma *enigma, char *output, const char *input);
+u8 encipher_char(Enigma *enigma, char c);
 
+/* Machine setup */
 static void apply_reflector_setting(Enigma *enigma, const char *str);
 static void apply_rotor_setting(Enigma *enigma, const char *str);
 static void apply_ring_setting(Enigma *enigma, const char *str);
 static void apply_plugboard_setting(Enigma *enigma, const char *str);
 static void apply_indicator_setting(Enigma *enigma, const char *str);
 
+/* Machine logic */
 static bool is_at_turnover(const Rotor *r);
 static void step_rotor(Rotor *r);
-static u8 rotor_pass(const Rotor *r, u8 n, Direction dir);
+static u8 apply_rotor_subst(const Rotor *r, Direction dir, u8 n);
+static u8 apply_subst(const Substitution *s, u8 n);
+
+/* Helpers */
 static size_t lex_numeric(HglStringView sv);
 static size_t lex_letter(HglStringView sv);
+static char to_upper(char c);
+static char in_alphabet(char c);
 
 /*--- Enigma functions ------------------------------------------------------------------*/
 
@@ -225,7 +236,9 @@ int enigma_cli_main(int argc, char *argv[])
     const char **opt_indicator_setting = hgl_flags_add_str("-g,--indicator-setting,--grundstellung", "Indicator setting (Ger: Grundstellung)", "1 1 1", 0);
 
     /* Enigma-cli general settings */
-    bool *opt_help              = hgl_flags_add_bool("--help,--hilfe", "Displays this message", false, 0);
+    bool *opt_help           = hgl_flags_add_bool("--help,--hilfe", "Displays this message", false, 0);
+    u64 *opt_group_size      = hgl_flags_add_u64_range("-G,--group-size", "Number of characters per group in the output.", 5, 0, 1, 64);
+    u64 *opt_groups_per_line = hgl_flags_add_u64_range("-N,--groups-per-line", "Number of groups per line in the output.", 6, 0, 1, 64);
 
     /* Parse arguments */
     int err = hgl_flags_parse(argc, argv);
@@ -248,18 +261,18 @@ int enigma_cli_main(int argc, char *argv[])
     apply_plugboard_setting(&enigma, *opt_plugboard_setting);
     apply_indicator_setting(&enigma, *opt_indicator_setting);
 
-    /* encrypt/decrypt from stdin */
+    /* encipher/decipher from stdin */
     static u8 input[SCRATCH_BUF_SIZE] = {0};
     static u8 output[SCRATCH_BUF_SIZE] = {0};
     size_t n_read_bytes = read(0, input, SCRATCH_BUF_SIZE);
     if (n_read_bytes <= 0) {
         return 1;
     }
-    size_t output_size = encrypt_str(&enigma, (char *) output, (char *) input);
+    size_t output_size = encipher_str(&enigma, (char *) output, (char *) input);
 
-    /* print result */
-    size_t group_size = 5;
-    size_t groups_per_row = 6;
+    /* Pretty-print result */
+    size_t group_size = *opt_group_size;
+    size_t groups_per_row = *opt_groups_per_line;
     size_t row_size = group_size * groups_per_row;
     size_t rows = output_size / (group_size * groups_per_row) + 1;
     for (size_t row = 0; row < rows; row++) {
@@ -275,25 +288,25 @@ int enigma_cli_main(int argc, char *argv[])
 }
 
 /**
- * Encrypts (or decrypts) the string at `input`, places the result into `output`, and
- * returns the length of the encrypted (or decrpyted) output. 
+ * Enciphers (or deciphers) the string at `input`, places the result into `output`, and
+ * returns the length of the enciphered (or deciphered) output. 
  */
-size_t encrypt_str(Enigma *enigma, char *output, const char *input)
+size_t encipher_str(Enigma *enigma, char *output, const char *input)
 {
     char *wr = output;
 
     char c;
     do {
         c = *input++;
-        c = TO_UPPER(c);
+        c = to_upper(c);
 
         /* Skip unrecognized letters */
-        if (!IN_ALPHABET(c)) {
+        if (!in_alphabet(c)) {
             continue;
         }
 
-        /* encrypt (or decrypt ... transcrypt? crypt?) character */
-        *wr++ = encrypt_char(enigma, c);
+        /* encipher (or decipher ... transcipher? cipher?) character */
+        *wr++ = encipher_char(enigma, c);
     } while (c != '\0');
 
     return wr - output;
@@ -301,12 +314,12 @@ size_t encrypt_str(Enigma *enigma, char *output, const char *input)
 
 
 /**
- * Encrypts (or decrypts) a single character (or letter) `c` given the current machine
+ * Enciphers (or deciphers) a single character (or letter) `c` given the current machine
  * settings and updates the rotor positions accordingly. 
  *
  * NB:`c` must be in the enigma alphabet and upper-case. 
  */
-u8 encrypt_char(Enigma *enigma, char c)
+u8 encipher_char(Enigma *enigma, char c)
 {
     /* 1. advance rotors */
     if (is_at_turnover(&enigma->rotor[1])) { 
@@ -317,18 +330,18 @@ u8 encrypt_char(Enigma *enigma, char c)
     }
     step_rotor(&enigma->rotor[2]);
 
-    /* 2. encrypt character */
-    u8 n = C2N(c); 
-    n = C2N(enigma->plugboard.image[n]);
-    n = rotor_pass(&enigma->rotor[2], n, FORWARD);
-    n = rotor_pass(&enigma->rotor[1], n, FORWARD);
-    n = rotor_pass(&enigma->rotor[0], n, FORWARD);
-    n = C2N(enigma->reflector.image[n]);
-    n = rotor_pass(&enigma->rotor[0], n, REVERSE);
-    n = rotor_pass(&enigma->rotor[1], n, REVERSE);
-    n = rotor_pass(&enigma->rotor[2], n, REVERSE);
-    n = C2N(enigma->plugboard.image[n]);
-    return N2C(n);
+    /* 2. encipher character */
+    u8 n = ENCODE(c); 
+    n = apply_subst(&enigma->plugboard, n);
+    n = apply_rotor_subst(&enigma->rotor[2], FORWARD, n);
+    n = apply_rotor_subst(&enigma->rotor[1], FORWARD, n);
+    n = apply_rotor_subst(&enigma->rotor[0], FORWARD, n);
+    n = apply_subst(&enigma->reflector, n);
+    n = apply_rotor_subst(&enigma->rotor[0], REVERSE, n);
+    n = apply_rotor_subst(&enigma->rotor[1], REVERSE, n);
+    n = apply_rotor_subst(&enigma->rotor[2], REVERSE, n);
+    n = apply_subst(&enigma->plugboard, n);
+    return DECODE(n);
 }
 
 /**
@@ -399,7 +412,7 @@ static void apply_ring_setting(Enigma *enigma, const char *str)
         }
         l = hgl_sv_lchop_lexeme(&sv, lex_letter);
         if (l.length != 0) {
-            enigma->rotor[i].ring_setting = C2N(TO_UPPER(l.start[0]));
+            enigma->rotor[i].ring_setting = ENCODE(to_upper(l.start[0]));
             continue;
         }
         ENIGMA_ERROR("Invalid ring setting \"%s\".", str);
@@ -422,16 +435,16 @@ static void apply_plugboard_setting(Enigma *enigma, const char *str)
         ENIGMA_ASSERT(pair.length == 2, "Invalid plugboard pair \"" HGL_SV_FMT "\". "
                       "String should be formatted as \"ab cd ef ...\"", HGL_SV_ARG(pair));
 
-        char c0 = TO_UPPER(pair.start[0]);
-        char c1 = TO_UPPER(pair.start[1]);
-        u8 n0 = C2N(c0);
-        u8 n1 = C2N(c1);
+        char c0 = to_upper(pair.start[0]);
+        char c1 = to_upper(pair.start[1]);
+        u8 n0 = ENCODE(c0);
+        u8 n1 = ENCODE(c1);
 
         ENIGMA_ASSERT(c0 != c1, "Invalid plugboard pair \"" HGL_SV_FMT "\". "
                       "A character can not be swapped with itself", HGL_SV_ARG(pair));
-        ENIGMA_ASSERT(IN_ALPHABET(c0), "Invalid plugboard pair \"" HGL_SV_FMT "\". "
+        ENIGMA_ASSERT(in_alphabet(c0), "Invalid plugboard pair \"" HGL_SV_FMT "\". "
                       "Character '%c' is not in the Enigma alphabet", HGL_SV_ARG(pair), c0);
-        ENIGMA_ASSERT(IN_ALPHABET(c1), "Invalid plugboard pair \"" HGL_SV_FMT "\". "
+        ENIGMA_ASSERT(in_alphabet(c1), "Invalid plugboard pair \"" HGL_SV_FMT "\". "
                       "Character '%c' is not in the Enigma alphabet", HGL_SV_ARG(pair), c1);
         ENIGMA_ASSERT(wiring[n0] == 0, "Invalid plugboard pair \"" HGL_SV_FMT "\". "
                       "The character '%c' has already been used.", HGL_SV_ARG(pair), c0);
@@ -463,7 +476,7 @@ static void apply_indicator_setting(Enigma *enigma, const char *str)
         }
         l = hgl_sv_lchop_lexeme(&sv, lex_letter);
         if (l.length != 0) {
-            enigma->rotor[i].position = C2N(TO_UPPER(l.start[0]));
+            enigma->rotor[i].position = ENCODE(to_upper(l.start[0]));
             continue;
         }
         ENIGMA_ERROR("Invalid indicator setting \"%s\".", str);
@@ -493,15 +506,23 @@ static void step_rotor(Rotor *r)
  * position and ring setting) and the current flow direction `dir` through the rotor, where
  * `n` is the numerical encoding of a letter in the Enigma alphabet.
  */
-static u8 rotor_pass(const Rotor *r, u8 n, Direction dir)
+static u8 apply_rotor_subst(const Rotor *r, Direction dir, u8 n)
 {
     n = (n - r->ring_setting + r->position + 26) % 26;
     switch (dir) {
-        case FORWARD: n = C2N(r->forward.image[n]); break;
-        case REVERSE: n = C2N(r->reverse.image[n]); break;
+        case FORWARD: n = apply_subst(&r->forward, n); break;
+        case REVERSE: n = apply_subst(&r->reverse, n); break;
     }
     n = (n + r->ring_setting - r->position + 26) % 26;
     return n;
+}
+
+/**
+ * Applies substitution `s` to `n`.
+ */
+static u8 apply_subst(const Substitution *s, u8 n)
+{
+    return ENCODE(s->image[n]);
 }
 
 /**
@@ -529,12 +550,29 @@ static size_t lex_letter(HglStringView sv)
     if (sv.length == 0) {
         return 0;
     }
-    char c = TO_UPPER(sv.start[0]);
+    char c = to_upper(sv.start[0]);
     if (c >= 'A' && c <= 'Z') {
         return 1;
     }
     return 0;
 }
+
+/**
+ * Returns the uppercase of `c`.
+ */
+static char to_upper(char c)
+{
+    return (c >= 'a' && c <= 'z') ? (c - 0x20) : c;
+}
+
+/**
+ * Returns true if `c` is in the Enigma alphabet.
+ */
+static char in_alphabet(char c)
+{
+    return c >= 'A' && c <= 'Z';
+}
+
 
 /*--- Main function ---------------------------------------------------------------------*/
 

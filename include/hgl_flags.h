@@ -183,6 +183,11 @@ const char **hgl_flags_add_str(const char *names, const char *desc, const char *
 int hgl_flags_parse(int argc, char *argv[]);
 
 /**
+ * Resets the global hgl_flags state.
+ */
+void hgl_flags_reset(void);
+
+/**
  * Prints the descriptions for all flags defined through calls to hgl_flags_add_*.
  */
 void hgl_flags_print(void);
@@ -521,6 +526,11 @@ int hgl_flags_parse(int argc, char *argv[])
     }
 
     return err;
+}
+
+void hgl_flags_reset(void)
+{
+    hgl_n_flags_ = 0;
 }
 
 void hgl_flags_print()

@@ -155,14 +155,15 @@
 /*--- Public macros ---------------------------------------------------------------------*/
 
 /* These are exit codes from the child test process */
-#define TEST_EXIT_SUCCESS                 0x0000
-#define TEST_EXIT_ASSERT_FAIL             0x0001
-#define TEST_EXIT_CAUGHT_EXPECTED_SIGNAL  0x0002
+#define TEST_EXIT_SUCCESS                         (0)
+#define TEST_EXIT_ASSERT_FAIL               (1u << 0)
+#define TEST_EXIT_CAUGHT_EXPECTED_SIGNAL    (1u << 1)
 
 /* These are determined after child termination */
-#define TEST_EXPECT_OUTPUT_FAIL           0x0100
-#define TEST_EXPECT_SIGNAL_FAIL           0x0200
-#define TEST_GOT_UNEXPECTED_SIGNAL_FAIL   0x0400
+#define TEST_EXPECT_OUTPUT_FAIL             (1u << 2)
+#define TEST_EXPECT_SIGNAL_FAIL             (1u << 3)
+#define TEST_GOT_UNEXPECTED_SIGNAL_FAIL     (1u << 4)
+#define TEST_EXPECT_EXIT_CODE_FAIL          (1u << 5)
 
 /* Style thingies */
 #define ANSI_RED       "\033[31m"
@@ -212,6 +213,8 @@
  *     .expect_output = "goodbye"    // Expect "goodbye" on stdout* (otherwise fail test)
  *     .expect_signal = SIGSEGV      // Expect test to generate a segmentation fault (otherwise fail test)
  *     .expect_fail = true           // Expect test to fail (otherwise fail test)
+ *     .expect_exit_code = 13        // Expect a specific exit code (will override .expect_signal and 
+ *                                   // cause any failed ASSERTS to PASS)
  *     .setup = my_setup_func        // Run `my_setup_func` before spawning the test process
  *     .teardown = my_teardown_func  // Run `my_teardown_func` after the test process exits
  *
@@ -237,9 +240,9 @@
     void test_fn_##name_(void);                                          \
     static const HglTest name_                                           \
     __attribute__((used, __section__("hgl_test_vtable"))) = {            \
-        .hidden.name    = __FILE__ ": " #name_,                          \
-        .hidden.test_fn = test_fn_##name_,                               \
-        .hidden.id      = __COUNTER__,                                   \
+        .hidden__.name    = __FILE__ ": " #name_,                        \
+        .hidden__.test_fn = test_fn_##name_,                             \
+        .hidden__.id      = __COUNTER__,                                 \
         __VA_ARGS__                                                      \
     };                                                                   \
     void test_fn_##name_()
@@ -305,16 +308,18 @@ typedef struct __attribute__((aligned (32)))
         void (*test_fn)(void);
         uint32_t result;
         uint32_t id;
+        uint8_t exit_code;
         bool pass;
-    } hidden; /* i.e. don't tuch this */
+    } hidden__; /* i.e. don't touch this */
 
     /* user defined */
-    const char *input;         // Start test with `input` on "stdin".
-    const char *expect_output; // Expect test to terminate with `expect_output` on "stdout".
-    int         expect_signal; // Expect test to exit with signal, otherwise fail test. E.g. `.expect_signal = SIGSEGV`
-    bool        expect_fail;   // Expect test to fail. Reports failure as success and vice versa.
-    void (*setup)(void);       // Specify a test-specific setup function to be run before the test.
-    void (*teardown)(void);    // Specify a test-specific teardown function to be run after the test.
+    const char *input;            // Start test with `input` on "stdin".
+    const char *expect_output;    // Expect test to terminate with `expect_output` on "stdout".
+    int         expect_signal;    // Expect test to exit with signal, otherwise fail test. E.g. `.expect_signal = SIGSEGV`
+    bool        expect_fail;      // Expect test to fail. Reports failure as success and vice versa.
+    uint8_t     expect_exit_code; // Expect test to terminate with the specified exit code.
+    void (*setup)(void);          // Specify a test-specific setup function to be run before the test.
+    void (*teardown)(void);       // Specify a test-specific teardown function to be run after the test.
 } HglTest;
 
 /*
@@ -450,7 +455,7 @@ void hgl_test_run_test(HglTest *test)
 
     if (!*hgl_test_opt_silent) {
         fprintf(stderr, "[" ANSI_MAGENTA ANSI_BOLD "%u" ANSI_NS ANSI_NC "] %s:\n",
-                        test->hidden.id, test->hidden.name);
+                        test->hidden__.id, test->hidden__.name);
     }
 
     pid_t pid = fork();
@@ -474,7 +479,7 @@ void hgl_test_run_test(HglTest *test)
         }
 
         /* execute test */
-        (test->hidden.test_fn)();
+        (test->hidden__.test_fn)();
 
         /* execute teardown function after test, if it exists */
         if (test->teardown != NULL) {
@@ -527,31 +532,54 @@ void hgl_test_run_test(HglTest *test)
     close(pipes[1][0]);
 
     /* determine test result */
-    test->hidden.result  = WEXITSTATUS(wstatus);
-    test->hidden.result |= WIFSIGNALED(wstatus) ? TEST_GOT_UNEXPECTED_SIGNAL_FAIL : 0;
+    test->hidden__.exit_code = WEXITSTATUS(wstatus);
+    test->hidden__.result = 0;
+    pass = true;
 
-    if ((test->expect_signal != 0) &&
-        ((test->hidden.result & TEST_EXIT_CAUGHT_EXPECTED_SIGNAL) == 0)) {
-        test->hidden.result |= TEST_EXPECT_SIGNAL_FAIL;
+    /* handle exit code */
+    if (test->expect_exit_code != 0) {
+        /* expect specific exit code */
+        if (test->hidden__.exit_code != test->expect_exit_code) {
+            test->hidden__.result |= TEST_EXPECT_EXIT_CODE_FAIL;
+            pass = false;
+        }
+    } else {
+        /* hgl_test.h exit code semantics */
+        if ((test->expect_signal != 0) &&
+            ((test->hidden__.exit_code & TEST_EXIT_CAUGHT_EXPECTED_SIGNAL) == 0)) {
+            test->hidden__.result |= TEST_EXPECT_SIGNAL_FAIL;
+            pass = false;
+        }
+    
+        if (0 != (test->hidden__.exit_code & TEST_EXIT_ASSERT_FAIL)) {
+            test->hidden__.result |= TEST_EXIT_ASSERT_FAIL;
+            pass = false;
+        }
+    }
+
+    if (WIFSIGNALED(wstatus)) {
+        test->hidden__.result |= TEST_GOT_UNEXPECTED_SIGNAL_FAIL;
+        pass = false;
     }
 
     if (test->expect_output != NULL) {
         if ((strlen(stdout_buffer) != strlen(test->expect_output)) ||
             (strcmp(stdout_buffer, test->expect_output) != 0)) {
-            test->hidden.result |= TEST_EXPECT_OUTPUT_FAIL;
+            test->hidden__.result |= TEST_EXPECT_OUTPUT_FAIL;
+            pass = false;
         }
     }
+    
+    if (0 != (test->hidden__.result & TEST_GOT_UNEXPECTED_SIGNAL_FAIL)) {
+        pass = false;
+    }
 
-    pass = (0 == (test->hidden.result & TEST_EXIT_ASSERT_FAIL)) &&
-           (0 == (test->hidden.result & TEST_EXPECT_SIGNAL_FAIL)) &&
-           (0 == (test->hidden.result & TEST_EXPECT_OUTPUT_FAIL)) &&
-           (0 == (test->hidden.result & TEST_GOT_UNEXPECTED_SIGNAL_FAIL));
     pass = (test->expect_fail) ? !pass : pass;
 
     /* Print additional errors */
     if (!pass & !*hgl_test_opt_silent) {
 
-        if (test->hidden.result & TEST_EXPECT_OUTPUT_FAIL) {
+        if (test->hidden__.result & TEST_EXPECT_OUTPUT_FAIL) {
             fprintf(stderr, ANSI_RED ANSI_BOLD "  OUTPUT ERROR" ANSI_NS ANSI_NC ": ");
             fprintf(stderr, ANSI_BOLD " Got output: " ANSI_NS "\"");
             hgl_test_print_escaped(stdout_buffer);
@@ -561,20 +589,26 @@ void hgl_test_run_test(HglTest *test)
             fprintf(stderr, "\"\n");
         }
 
-        if (test->hidden.result & TEST_GOT_UNEXPECTED_SIGNAL_FAIL) {
+        if (test->hidden__.result & TEST_GOT_UNEXPECTED_SIGNAL_FAIL) {
             fprintf(stderr, ANSI_RED ANSI_BOLD "  SIGNAL ERROR" ANSI_NS ANSI_NC ": ");
             fprintf(stderr, ANSI_BOLD " Terminated by signal: " ANSI_NS "%d (%s)\n",
                             WTERMSIG(wstatus), strsignal(WTERMSIG(wstatus)));
         }
 
-        if (test->hidden.result & TEST_EXPECT_SIGNAL_FAIL) {
+        if (test->hidden__.result & TEST_EXPECT_SIGNAL_FAIL) {
             fprintf(stderr, ANSI_RED ANSI_BOLD "  SIGNAL ERROR" ANSI_NS ANSI_NC ": ");
             fprintf(stderr, ANSI_BOLD " Expected termination by signal: " ANSI_NS "%d (%s)\n",
                             test->expect_signal, strsignal(test->expect_signal));
         }
+
+        if (test->hidden__.result & TEST_EXPECT_EXIT_CODE_FAIL) {
+            fprintf(stderr, ANSI_RED ANSI_BOLD "  EXIT CODE ERROR" ANSI_NS ANSI_NC ": ");
+            fprintf(stderr, ANSI_BOLD " Expected exit code: " ANSI_NS "%d  " ANSI_BOLD 
+                            "Got: " ANSI_NS "%d\n", test->expect_exit_code, WEXITSTATUS(wstatus));
+        }
     }
 
-    test->hidden.pass = pass;
+    test->hidden__.pass = pass;
 }
 
 /*--- Main ------------------------------------------------------------------------------*/
@@ -610,7 +644,7 @@ int main(int argc, char *argv[])
     bool failed = false;
     for (test = &__start_hgl_test_vtable; test != &__stop_hgl_test_vtable; test++) {
         hgl_test_run_test(test);
-        if (*hgl_test_opt_fail_fast && !test->hidden.pass) {
+        if (*hgl_test_opt_fail_fast && !test->hidden__.pass) {
             failed = true;
             break; /* exit prematurely */
         }
@@ -629,29 +663,32 @@ int main(int argc, char *argv[])
     /* print test summary */
     printf("\n\e[4m\e[1m%-8s %-59s %-64s\e[m\n", " ID:", "File/Test:", "Result (cause):");
     for (test = &__start_hgl_test_vtable; test != &__stop_hgl_test_vtable; test++) {
-        if (test->hidden.pass) {
+        if (test->hidden__.pass) {
             n_passing++;
         }
-        if (*hgl_test_opt_show_only_fails && test->hidden.pass) {
+        if (*hgl_test_opt_show_only_fails && test->hidden__.pass) {
             continue;
         }
         printf("%7u| %-58s | %s   ",
-               test->hidden.id,
-               test->hidden.name,
-               test->hidden.pass ? ANSI_GREEN ANSI_BOLD "PASS \u2713" ANSI_NC ANSI_NS
-                                  : ANSI_RED ANSI_BOLD "FAIL \u2715" ANSI_NC ANSI_NS);
-        if (!test->hidden.pass) {
-            if (test->hidden.result & TEST_EXIT_ASSERT_FAIL) {
+               test->hidden__.id,
+               test->hidden__.name,
+               test->hidden__.pass ? ANSI_GREEN ANSI_BOLD "PASS \u2713" ANSI_NC ANSI_NS
+                                   : ANSI_RED ANSI_BOLD "FAIL \u2715" ANSI_NC ANSI_NS);
+        if (!test->hidden__.pass) {
+            if (test->hidden__.result & TEST_EXIT_ASSERT_FAIL) {
                 printf(AMBER_PLUS "Assertion failed ");
             }
-            if (test->hidden.result & TEST_EXPECT_OUTPUT_FAIL) {
+            if (test->hidden__.result & TEST_EXPECT_OUTPUT_FAIL) {
                 printf(AMBER_PLUS "Incorrect output ");
             }
-            if (test->hidden.result & TEST_EXPECT_SIGNAL_FAIL) {
+            if (test->hidden__.result & TEST_EXPECT_SIGNAL_FAIL) {
                 printf(AMBER_PLUS "Did not exit with expected signal ");
             }
-            if (test->hidden.result & TEST_GOT_UNEXPECTED_SIGNAL_FAIL) {
+            if (test->hidden__.result & TEST_GOT_UNEXPECTED_SIGNAL_FAIL) {
                 printf(AMBER_PLUS "Exited with unexpected signal ");
+            }
+            if (test->hidden__.result & TEST_EXPECT_EXIT_CODE_FAIL) {
+                printf(AMBER_PLUS "Exited with unexpected exit code ");
             }
         }
         printf("\n");
