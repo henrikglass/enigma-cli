@@ -11,13 +11,13 @@ C_WARNINGS := -Werror -Wall -Wlogical-op -Wextra -Wvla -Wnull-dereference \
 C_INCLUDES := -I. -Iinclude
 C_FLAGS    := $(C_WARNINGS) $(C_INCLUDES) --std=c17 -O0 -ggdb3 
 
-all: enigma-cli 
-
 enigma-cli:
 	gcc $(C_FLAGS) src/enigma_cli.c -o enigma-cli
 
 test:
 	gcc $(C_FLAGS) -Wno-discarded-qualifiers -Isrc test/test.c -o enigma-test && ./enigma-test
+
+all: enigma-cli test
 
 clean:
 	-rm enigma-cli
