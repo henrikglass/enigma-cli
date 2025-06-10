@@ -196,7 +196,7 @@ void hgl_flags_print(void);
  * Returns `true` if `opt_value` was parsed from the arguments. Conversely, returns
  * `false` if it simply inherited the default value.
  */
-bool hgl_flags_occured_in_args(void *opt_value);
+bool hgl_flags_occurred_in_args(void *opt_value);
 
 /**
  * Returns `true` if `opt_a` was parsed before `opt_b` from the arguments. If either
@@ -204,7 +204,7 @@ bool hgl_flags_occured_in_args(void *opt_value);
  * it's treated as occuring "first". If both options retained their default values
  * then reconsider calling this function.
  */
-bool hgl_flags_occured_before(void *opt_a, void *opt_b);
+bool hgl_flags_occurred_before(void *opt_a, void *opt_b);
 
 /**
  * Generates a completion cmd for the `completion` command line utility on
@@ -573,7 +573,7 @@ void hgl_flags_print()
     }
 }
 
-bool hgl_flags_occured_in_args(void *opt)
+bool hgl_flags_occurred_in_args(void *opt)
 {
     uint8_t *ptr8 = (uint8_t *) opt;
     ptr8 -= offsetof(HglFlag, value);
@@ -582,7 +582,7 @@ bool hgl_flags_occured_in_args(void *opt)
     return ((flag->status & HGL_FLAGS_STATUS_PARSED) != 0);
 }
 
-bool hgl_flags_occured_before(void *opt_a, void *opt_b)
+bool hgl_flags_occurred_before(void *opt_a, void *opt_b)
 {
     uint8_t *ptr8_a = (uint8_t *) opt_a;
     uint8_t *ptr8_b = (uint8_t *) opt_b;

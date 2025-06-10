@@ -40,7 +40,10 @@
  *       -r,--ring-setting,--ringstellung                 Ring setting (Ger: Ringstellung) (default = "1 1 1")
  *       -s,--plugboard-setting,--steckerverbindungen     Plugboard transpositions (Ger: Steckerverbindungen) (default = "")
  *       -g,--indicator-setting,--grundstellung           Indicator setting (Ger: Grundstellung) (default = "1 1 1")
+ *       -G,--group-size                                  Number of characters per group in the output. (default = 5, valid range = [1, 64])
+ *       -N,--groups-per-line                             Number of groups per line in the output. (default = 6, valid range = [1, 64])
  *       --help,--hilfe                                   Displays this message (default = 0)
+ *
  *
  * EXAMPLE:
  *
@@ -236,9 +239,9 @@ int enigma_cli_main(int argc, char *argv[])
     const char **opt_indicator_setting = hgl_flags_add_str("-g,--indicator-setting,--grundstellung", "Indicator setting (Ger: Grundstellung)", "1 1 1", 0);
 
     /* Enigma-cli general settings */
-    bool *opt_help           = hgl_flags_add_bool("--help,--hilfe", "Displays this message", false, 0);
     u64 *opt_group_size      = hgl_flags_add_u64_range("-G,--group-size", "Number of characters per group in the output.", 5, 0, 1, 64);
     u64 *opt_groups_per_line = hgl_flags_add_u64_range("-N,--groups-per-line", "Number of groups per line in the output.", 6, 0, 1, 64);
+    bool *opt_help           = hgl_flags_add_bool("--help,--hilfe", "Displays this message", false, 0);
 
     /* Parse arguments */
     int err = hgl_flags_parse(argc, argv);
