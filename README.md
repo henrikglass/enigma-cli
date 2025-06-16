@@ -1,3 +1,5 @@
+[![Build and Test](https://github.com/henrikglass/enigma-cli/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/henrikglass/enigma-cli/actions/workflows/build-and-test.yml)
+
 # enigma-cli
 Enigma-cli is a simulation of the Enigma M3 cipher machine used by the German military 
 to send secret messages during WWII. Enimga-cli is usable entirely from the 
