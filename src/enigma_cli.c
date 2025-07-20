@@ -105,6 +105,7 @@
 
 /*--- Private type definitions ----------------------------------------------------------*/
 
+typedef bool      b8;
 typedef uint8_t   u8;
 typedef uint16_t u16;
 typedef uint32_t u32;
@@ -113,6 +114,7 @@ typedef int8_t    i8;
 typedef int16_t  i16;
 typedef int32_t  i32;
 typedef int64_t  i64;
+static_assert(sizeof(b8) == 1, "");
 
 typedef enum {
     FORWARD,
@@ -213,7 +215,7 @@ static void apply_plugboard_setting(Enigma *enigma, const char *str);
 static void apply_indicator_setting(Enigma *enigma, const char *str);
 
 /* Machine logic */
-static bool is_at_turnover(const Rotor *r);
+static b8 is_at_turnover(const Rotor *r);
 static void step_rotor(Rotor *r);
 static u8 apply_rotor_subst(const Rotor *r, Direction dir, u8 n);
 static u8 apply_subst(const Substitution *s, u8 n);
@@ -241,7 +243,7 @@ int enigma_cli_main(int argc, char *argv[])
     /* Enigma-cli general settings */
     u64 *opt_group_size      = hgl_flags_add_u64_range("-G,--group-size", "Number of characters per group in the output.", 5, 0, 1, 64);
     u64 *opt_groups_per_line = hgl_flags_add_u64_range("-N,--groups-per-line", "Number of groups per line in the output.", 6, 0, 1, 64);
-    bool *opt_help           = hgl_flags_add_bool("--help,--hilfe", "Displays this message", false, 0);
+    b8  *opt_help            = hgl_flags_add_bool("--help,--hilfe", "Displays this message", false, 0);
 
     /* Parse arguments */
     int err = hgl_flags_parse(argc, argv);
@@ -490,7 +492,7 @@ static void apply_indicator_setting(Enigma *enigma, const char *str)
 /**
  * Returns true if rotor `r` is positioned at a turnover notch.
  */
-static bool is_at_turnover(const Rotor *r)
+static b8 is_at_turnover(const Rotor *r)
 {
     return (r->position == r->turnover1) ||
            (r->position == r->turnover2);
